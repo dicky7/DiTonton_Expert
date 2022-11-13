@@ -156,8 +156,17 @@ void main() {
         expect(resultList, [testMovieFromCache]);
       });
 
-    });
+      test('should return CacheFailure when app has no cache', () async{
+        //arrange
+        when(mockLocalDataSource.getCachedNowPlayingMovies()).thenThrow(CacheException('No Cache'));
+        //act
+        final result = await repository.getNowPlayingMovies();
+        //assert
+        verify(mockLocalDataSource.getCachedNowPlayingMovies());
+        expect(result, Left("No Cache"));
+      });
 
+    });
   });
 
   group('Popular Movies', () {
