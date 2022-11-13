@@ -34,8 +34,12 @@ class MovieRepositoryImpl implements MovieRepository {
         return Left(ServerFailure(''));
       }
     }else{
-      final result = await localDataSource.getCachedNowPlayingMovies();
-      return Right(result.map((model) => model.toEntity()).toList());
+      try{
+        final result = await localDataSource.getCachedNowPlayingMovies();
+        return Right(result.map((model) => model.toEntity()).toList());
+      }catch CacheException catch(e){
+        return Left(CacheF)
+    }
     }
   }
 
