@@ -163,7 +163,7 @@ void main() {
         final result = await repository.getNowPlayingMovies();
         //assert
         verify(mockLocalDataSource.getCachedNowPlayingMovies());
-        expect(result, Left("No Cache"));
+        expect(result, Left(CacheFailure("No Cache")));
       });
 
     });
