@@ -51,6 +51,27 @@ class TvDetail extends Equatable{
 
   @override
   // TODO: implement props
-  List<Object?> get props => throw UnimplementedError();
+  List<Object?> get props => [
+    backdropPath,
+    episodeRunTime,
+    firstAirDate,
+    genres,
+    homepage,
+    id,
+    name,
+    numberOfEpisodes,
+    numberOfSeasons,
+    originalLanguage,
+    originalName,
+    overview,
+    popularity,
+    posterPath,
+    seasons,
+    status,
+    tagline,
+    type,
+    voteAverage,
+    voteCount,
+  ];
 
 }
