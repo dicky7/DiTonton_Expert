@@ -1,8 +1,8 @@
 import 'dart:convert';
 
-import 'package:ditonton/data/datasources/movie_remote_data_source.dart';
-import 'package:ditonton/data/models/movie_detail_model.dart';
-import 'package:ditonton/data/models/movie_response.dart';
+import 'package:ditonton/data/movie/datasources/movie_remote_data_source.dart';
+import 'package:ditonton/data/movie/models/movie_detail_model.dart';
+import 'package:ditonton/data/movie/models/movie_response.dart';
 import 'package:ditonton/common/exception.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:http/http.dart' as http;
@@ -24,17 +24,14 @@ void main() {
   });
 
   group('get Now Playing Movies', () {
-    final tMovieList = MovieResponse.fromJson(
-            json.decode(readJson('dummy_data/now_playing.json')))
-        .movieList;
+    final tMovieList = MovieResponse.fromJson(json.decode(readJson('dummy_data/now_playing.json'))).movieList;
 
-    test('should return list of Movie Model when the response code is 200',
-        () async {
+    test('should return list of Movie Model when the response code is 200', () async {
       // arrange
-      when(mockHttpClient
-              .get(Uri.parse('$BASE_URL/movie/now_playing?$API_KEY')))
-          .thenAnswer((_) async =>
-              http.Response(readJson('dummy_data/now_playing.json'), 200));
+      when(
+          mockHttpClient.get(Uri.parse('$BASE_URL/movie/now_playing?$API_KEY')))
+          .thenAnswer((_) async => http.Response(readJson('dummy_data/now_playing.json'), 200)
+      );
       // act
       final result = await dataSource.getNowPlayingMovies();
       // assert

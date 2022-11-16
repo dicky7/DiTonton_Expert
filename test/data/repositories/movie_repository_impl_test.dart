@@ -1,14 +1,14 @@
 import 'dart:io';
 
 import 'package:dartz/dartz.dart';
-import 'package:ditonton/data/models/genre_model.dart';
-import 'package:ditonton/data/models/movie_detail_model.dart';
-import 'package:ditonton/data/models/movie_model.dart';
-import 'package:ditonton/data/models/movie_table.dart';
-import 'package:ditonton/data/repositories/movie_repository_impl.dart';
+import 'package:ditonton/data/movie/models/genre_model.dart';
+import 'package:ditonton/data/movie/models/movie_detail_model.dart';
+import 'package:ditonton/data/movie/models/movie_model.dart';
+import 'package:ditonton/data/movie/models/movie_table.dart';
+import 'package:ditonton/data/movie/repositories/movie_repository_impl.dart';
 import 'package:ditonton/common/exception.dart';
 import 'package:ditonton/common/failure.dart';
-import 'package:ditonton/domain/entities/movie.dart';
+import 'package:ditonton/domain/movie/entities/movie.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/mockito.dart';
 
@@ -77,10 +77,6 @@ void main() {
   final tMovieList = <Movie>[tMovie];
 
   group('Now Playing Movies', () {
-    setup() {
-      when(mockNetworkInfo.isConnected).thenAnswer((_) async => true);
-    }
-
     test('should check if the device is online', () async {
       //arrange
       when(mockNetworkInfo.isConnected).thenAnswer((_) async => true);
@@ -119,7 +115,7 @@ void main() {
         when(mockRemoteDataSource.getNowPlayingMovies())
             .thenAnswer((_) async => tMovieModelList);
         //act
-        await await repository.getNowPlayingMovies();
+        await repository.getNowPlayingMovies();
         //assert
         verify(mockRemoteDataSource.getNowPlayingMovies());
         verify(mockLocalDataSource.cacheNowPlayingMovies([testMovieCache]));
@@ -210,8 +206,7 @@ void main() {
   });
 
   group('Top Rated Movies', () {
-    test('should return movie list when call to data source is successful',
-        () async {
+    test('should return movie list when call to data source is successful', () async {
       // arrange
       when(mockRemoteDataSource.getTopRatedMovies())
           .thenAnswer((_) async => tMovieModelList);
