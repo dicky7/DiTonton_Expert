@@ -13,7 +13,7 @@ class PopularTvNotifier extends ChangeNotifier{
   RequestState get state => _state;
 
   List<Tv> _tvShows = [];
-  List<Tv> get movies => _tvShows;
+  List<Tv> get tvShow => _tvShows;
 
   String _message = '';
   String get message => _message;

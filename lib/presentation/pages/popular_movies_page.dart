@@ -1,8 +1,12 @@
 import 'package:ditonton/common/state_enum.dart';
+import 'package:ditonton/domain/movie/entities/movie_detail.dart';
+import 'package:ditonton/presentation/pages/movie_detail_page.dart';
 import 'package:ditonton/presentation/provider/popular_movies_notifier.dart';
-import 'package:ditonton/presentation/widgets/movie_card_list.dart';
+import 'package:ditonton/presentation/widgets/item_card_list.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+
+import '../../common/drawer_item_enum.dart';
 
 class PopularMoviesPage extends StatefulWidget {
   static const ROUTE_NAME = '/popular-movie';
@@ -38,7 +42,11 @@ class _PopularMoviesPageState extends State<PopularMoviesPage> {
               return ListView.builder(
                 itemBuilder: (context, index) {
                   final movie = data.movies[index];
-                  return MovieCard(movie);
+                  return ItemCard(
+                    activeDrawerItem: DrawerItem.Movie,
+                    routeName: MovieDetailPage.ROUTE_NAME,
+                    movie: movie,
+                  );
                 },
                 itemCount: data.movies.length,
               );

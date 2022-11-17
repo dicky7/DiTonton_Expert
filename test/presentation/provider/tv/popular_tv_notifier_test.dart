@@ -44,7 +44,7 @@ void main(){
     await notifier.fetchPopularTv();
     // assert
     expect(notifier.state, RequestState.Loaded);
-    expect(notifier.movies, testTvList);
+    expect(notifier.tvShow, testTvList);
     expect(listenerCallCount, 2);
   });
 

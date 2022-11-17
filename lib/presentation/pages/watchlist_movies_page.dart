@@ -1,9 +1,12 @@
 import 'package:ditonton/common/state_enum.dart';
 import 'package:ditonton/common/utils.dart';
 import 'package:ditonton/presentation/provider/watchlist_movie_notifier.dart';
-import 'package:ditonton/presentation/widgets/movie_card_list.dart';
+import 'package:ditonton/presentation/widgets/item_card_list.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+
+import '../../common/drawer_item_enum.dart';
+import 'movie_detail_page.dart';
 
 class WatchlistMoviesPage extends StatefulWidget {
   static const ROUTE_NAME = '/watchlist-movie';
@@ -12,8 +15,7 @@ class WatchlistMoviesPage extends StatefulWidget {
   _WatchlistMoviesPageState createState() => _WatchlistMoviesPageState();
 }
 
-class _WatchlistMoviesPageState extends State<WatchlistMoviesPage>
-    with RouteAware {
+class _WatchlistMoviesPageState extends State<WatchlistMoviesPage> with RouteAware {
   @override
   void initState() {
     super.initState();
@@ -51,7 +53,11 @@ class _WatchlistMoviesPageState extends State<WatchlistMoviesPage>
               return ListView.builder(
                 itemBuilder: (context, index) {
                   final movie = data.watchlistMovies[index];
-                  return MovieCard(movie);
+                  return ItemCard(
+                    activeDrawerItem: DrawerItem.Movie,
+                    routeName: MovieDetailPage.ROUTE_NAME,
+                    movie: movie,
+                  );
                 },
                 itemCount: data.watchlistMovies.length,
               );

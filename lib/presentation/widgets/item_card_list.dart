@@ -4,10 +4,17 @@ import 'package:ditonton/domain/movie/entities/movie.dart';
 import 'package:ditonton/presentation/pages/movie_detail_page.dart';
 import 'package:flutter/material.dart';
 
-class MovieCard extends StatelessWidget {
-  final Movie movie;
+import '../../common/drawer_item_enum.dart';
+import '../../domain/tv/entities/tv.dart';
 
-  MovieCard(this.movie);
+class ItemCard extends StatelessWidget {
+  final Movie? movie;
+  final Tv? tv;
+  final DrawerItem activeDrawerItem;
+  final String routeName;
+
+
+  ItemCard({this.movie, this.tv, required this.activeDrawerItem, required this.routeName});
 
   @override
   Widget build(BuildContext context) {
@@ -17,8 +24,8 @@ class MovieCard extends StatelessWidget {
         onTap: () {
           Navigator.pushNamed(
             context,
-            MovieDetailPage.ROUTE_NAME,
-            arguments: movie.id,
+            routeName,
+            arguments: _getId(),
           );
         },
         child: Stack(
@@ -35,14 +42,14 @@ class MovieCard extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      movie.title ?? '-',
+                      _getTitle() ?? '-',
                       maxLines: 1,
                       overflow: TextOverflow.ellipsis,
                       style: kHeading6,
                     ),
                     SizedBox(height: 16),
                     Text(
-                      movie.overview ?? '-',
+                      _getOverview() ?? '-',
                       maxLines: 2,
                       overflow: TextOverflow.ellipsis,
                     ),
@@ -57,7 +64,7 @@ class MovieCard extends StatelessWidget {
               ),
               child: ClipRRect(
                 child: CachedNetworkImage(
-                  imageUrl: '$BASE_IMAGE_URL${movie.posterPath}',
+                  imageUrl: '$BASE_IMAGE_URL${_getPosterPath()}',
                   width: 80,
                   placeholder: (context, url) => Center(
                     child: CircularProgressIndicator(),
@@ -72,4 +79,20 @@ class MovieCard extends StatelessWidget {
       ),
     );
   }
+
+  int _getId() => activeDrawerItem == DrawerItem.Movie
+      ? movie?.id as int
+      : tv?.id as int;
+
+  String? _getTitle() => activeDrawerItem == DrawerItem.Movie
+      ? movie?.title
+      : tv?.name;
+
+  String? _getOverview() => activeDrawerItem == DrawerItem.Movie
+      ? movie?.overview
+      : tv?.overview;
+
+  String _getPosterPath() => activeDrawerItem == DrawerItem.Movie
+      ? movie?.posterPath as String
+      : tv?.posterPath as String;
 }

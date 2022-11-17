@@ -24,6 +24,7 @@ import 'package:ditonton/domain/tv/usecase/get_watchlist_tv.dart';
 import 'package:ditonton/domain/tv/usecase/remove_watchlist_tv.dart';
 import 'package:ditonton/domain/tv/usecase/save_watchlist_tv.dart';
 import 'package:ditonton/domain/tv/usecase/search_tv.dart';
+import 'package:ditonton/presentation/provider/home_notifier.dart';
 import 'package:ditonton/presentation/provider/movie_detail_notifier.dart';
 import 'package:ditonton/presentation/provider/movie_list_notifier.dart';
 import 'package:ditonton/presentation/provider/popular_movies_notifier.dart';
@@ -38,6 +39,7 @@ import 'package:ditonton/presentation/provider/watchlist_movie_notifier.dart';
 import 'package:get_it/get_it.dart';
 import 'package:http/http.dart' as http;
 
+import 'data/tv/datasources/db/tv_database_helper.dart';
 import 'data/tv/datasources/tv_local_data_source.dart';
 import 'data/tv/datasources/tv_remote_data_source.dart';
 import 'data/tv/repositories/tv_repository_impl.dart';
@@ -117,6 +119,10 @@ void init() {
       locator(),
     ),
   );
+  //provider home
+  locator.registerFactory(
+        () => HomeNotifier(),
+  );
 
 
   // use case movie
@@ -173,6 +179,7 @@ void init() {
 
   // helper
   locator.registerLazySingleton<DatabaseHelper>(() => DatabaseHelper());
+  locator.registerLazySingleton<TvDatabaseHelper>(() => TvDatabaseHelper());
 
   //networkInfo
   locator.registerLazySingleton<NetworkInfo>(() => NetworkInfoImpl(locator()));
