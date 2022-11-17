@@ -279,11 +279,11 @@ class TvDetailContent extends StatelessWidget {
                       ),
                     ),
                     Positioned(
-                      left: 8.0,
+                      left: 4.0,
                       top: 4.0,
                       child: Text(
-                        (index + 1).toString(),
-                        style: kHeading5.copyWith(fontSize: 26.0),
+                        "Season "+(index + 1).toString(),
+                        style: kHeading5.copyWith(fontSize: 17.0),
                       ),
                     ),
                   ],
