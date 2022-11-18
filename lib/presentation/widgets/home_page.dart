@@ -6,6 +6,7 @@ import 'package:provider/provider.dart';
 import '../../common/drawer_item_enum.dart';
 import '../pages/home_movie_page.dart';
 import '../pages/tv/home_tv_page.dart';
+import '../pages/watchlist_page.dart';
 import '../provider/home_notifier.dart';
 
 class HomePage extends StatefulWidget {
@@ -31,6 +32,9 @@ class _HomePageState extends State<HomePage> with SingleTickerProviderStateMixin
       return HomeMoviePage();
     } else if (seletedDrawerItem == DrawerItem.TvShow) {
       return HomeTvPage();
+    }
+    else if(seletedDrawerItem ==  DrawerItem.Watchlist){
+      return WatchlistPage();
     }
     return Container();
   }
@@ -68,7 +72,7 @@ class _HomePageState extends State<HomePage> with SingleTickerProviderStateMixin
             leading: Icon(Icons.save_alt),
             title: Text("Watchlist"),
             onTap: () {
-              Navigator.pushNamed(context, WatchlistMoviesPage.ROUTE_NAME);
+              itemCallback(DrawerItem.Watchlist);
               _animationController.reverse();
             },
           ),

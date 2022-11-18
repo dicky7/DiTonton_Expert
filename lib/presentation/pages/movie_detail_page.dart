@@ -109,22 +109,12 @@ class DetailContent extends StatelessWidget {
                             ElevatedButton(
                               onPressed: () async {
                                 if (!isAddedWatchlist) {
-                                  await Provider.of<MovieDetailNotifier>(
-                                          context,
-                                          listen: false)
-                                      .addWatchlist(movie);
+                                  await Provider.of<MovieDetailNotifier>(context, listen: false).addWatchlist(movie);
                                 } else {
-                                  await Provider.of<MovieDetailNotifier>(
-                                          context,
-                                          listen: false)
-                                      .removeFromWatchlist(movie);
+                                  await Provider.of<MovieDetailNotifier>(context, listen: false).removeFromWatchlist(movie);
                                 }
 
-                                final message =
-                                    Provider.of<MovieDetailNotifier>(context,
-                                            listen: false)
-                                        .watchlistMessage;
-
+                                final message = Provider.of<MovieDetailNotifier>(context, listen: false).watchlistMessage;
                                 if (message == MovieDetailNotifier.watchlistAddSuccessMessage ||
                                     message == MovieDetailNotifier.watchlistRemoveSuccessMessage) {
                                   ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(message)));

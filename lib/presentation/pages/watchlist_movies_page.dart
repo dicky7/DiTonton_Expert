@@ -9,13 +9,12 @@ import '../../common/drawer_item_enum.dart';
 import 'movie_detail_page.dart';
 
 class WatchlistMoviesPage extends StatefulWidget {
-  static const ROUTE_NAME = '/watchlist-movie';
 
   @override
   _WatchlistMoviesPageState createState() => _WatchlistMoviesPageState();
 }
 
-class _WatchlistMoviesPageState extends State<WatchlistMoviesPage> with RouteAware {
+class _WatchlistMoviesPageState extends State<WatchlistMoviesPage> {
   @override
   void initState() {
     super.initState();
@@ -25,31 +24,17 @@ class _WatchlistMoviesPageState extends State<WatchlistMoviesPage> with RouteAwa
   }
 
   @override
-  void didChangeDependencies() {
-    super.didChangeDependencies();
-    routeObserver.subscribe(this, ModalRoute.of(context)!);
-  }
-
-  void didPopNext() {
-    Provider.of<WatchlistMovieNotifier>(context, listen: false)
-        .fetchWatchlistMovies();
-  }
-
-  @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text('Watchlist'),
-      ),
-      body: Padding(
-        padding: const EdgeInsets.all(8.0),
-        child: Consumer<WatchlistMovieNotifier>(
-          builder: (context, data, child) {
-            if (data.watchlistState == RequestState.Loading) {
-              return Center(
-                child: CircularProgressIndicator(),
-              );
-            } else if (data.watchlistState == RequestState.Loaded) {
+    return Padding(
+      padding: const EdgeInsets.all(8.0),
+      child: Consumer<WatchlistMovieNotifier>(
+        builder: (context, data, child) {
+          if (data.watchlistState == RequestState.Loading) {
+            return Center(
+              child: CircularProgressIndicator(),
+            );
+          } else if (data.watchlistState == RequestState.Loaded) {
+            if (data.watchlistMovies.length > 0 ) {
               return ListView.builder(
                 itemBuilder: (context, index) {
                   final movie = data.watchlistMovies[index];
@@ -61,21 +46,19 @@ class _WatchlistMoviesPageState extends State<WatchlistMoviesPage> with RouteAwa
                 },
                 itemCount: data.watchlistMovies.length,
               );
-            } else {
-              return Center(
-                key: Key('error_message'),
-                child: Text(data.message),
-              );
             }
-          },
-        ),
+            else{
+              return Center(child: Text("Tv Watchlist Empty"));
+            }
+
+          } else {
+            return Center(
+              key: Key('error_message'),
+              child: Text(data.message),
+            );
+          }
+        },
       ),
     );
-  }
-
-  @override
-  void dispose() {
-    routeObserver.unsubscribe(this);
-    super.dispose();
   }
 }

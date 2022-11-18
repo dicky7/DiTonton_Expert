@@ -2,6 +2,8 @@ import 'dart:math';
 
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:ditonton/domain/tv/entities/tv.dart';
+import 'package:ditonton/presentation/pages/tv/popular_tv_page.dart';
+import 'package:ditonton/presentation/pages/tv/top_rated_tv_page.dart';
 import 'package:ditonton/presentation/pages/tv/tv_detail_page.dart';
 import 'package:ditonton/presentation/provider/tv/tv_list_notifier.dart';
 import 'package:flutter/material.dart';
@@ -83,8 +85,9 @@ class _HomeTvPageState extends State<HomeTvPage> with TickerProviderStateMixin {
                 }
               }),
               _buildSubHeading(title: "Popular", onTap: () {
-
+                Navigator.pushNamed(context, PopularTvPage.ROUTE_NAME);
               }),
+
               Consumer<TvListNotifier>(builder: (context, value, child) {
                 final state = value.popularTvState;
                 if (state == RequestState.Loading) {
@@ -98,6 +101,7 @@ class _HomeTvPageState extends State<HomeTvPage> with TickerProviderStateMixin {
                 }
               }),
               _buildSubHeading(title: "Top Rated", onTap: () {
+                Navigator.pushNamed(context, TopRatedTvPage.ROUTE_NAME);
 
               }),
               Consumer<TvListNotifier>(builder: (context, value, child) {

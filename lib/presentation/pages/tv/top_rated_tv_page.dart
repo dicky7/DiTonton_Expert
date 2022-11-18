@@ -9,6 +9,7 @@ import '../../../common/state_enum.dart';
 import '../../widgets/item_card_list.dart';
 
 class TopRatedTvPage extends StatefulWidget{
+  static const ROUTE_NAME = "/tv_top_rated";
   @override
   State<TopRatedTvPage> createState() => _TopRatedTvPageState();
 }
@@ -18,7 +19,7 @@ class _TopRatedTvPageState extends State<TopRatedTvPage> {
   void initState() {
     Future.microtask(() =>
     Provider.of<TopRatedTvNotifier>(context, listen: false)
-      ..getTopRatedTv);
+      ..fetchTopRatedTv());
     super.initState();
   }
 

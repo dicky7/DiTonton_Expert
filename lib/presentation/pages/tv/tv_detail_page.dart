@@ -104,8 +104,7 @@ class TvDetailContent extends StatelessWidget {
               return Container(
                 decoration: BoxDecoration(
                     color: kRichBlack,
-                    borderRadius: BorderRadius.vertical(
-                        top: Radius.circular(20))
+                    borderRadius: BorderRadius.vertical(top: Radius.circular(20))
                 ),
                 padding: EdgeInsets.only(top: 16, left: 16, right: 16),
                 child: Stack(
@@ -132,24 +131,15 @@ class TvDetailContent extends StatelessWidget {
                             ElevatedButton(
                               onPressed: () async {
                                 if (!isAddedWatchlist) {
-                                  await Provider.of<TvDetailNotifier>(
-                                      context, listen: false).addWatchListTv(
-                                      tvDetail);
+                                  await Provider.of<TvDetailNotifier>(context, listen: false).addWatchListTv(tvDetail);
                                 } else {
-                                  await Provider.of<TvDetailNotifier>(
-                                      context, listen: false)
-                                      .removeFromWatchlistTv(tvDetail);
+                                  await Provider.of<TvDetailNotifier>(context, listen: false).removeFromWatchlistTv(tvDetail);
                                 }
 
-                                final message = Provider
-                                    .of<TvDetailNotifier>(context)
-                                    .watchlistMessage;
-                                if (message == TvDetailNotifier
-                                    .tvWatchlistAddSuccessMessage || message ==
-                                    TvDetailNotifier
-                                        .tvWatchlistRemoveSuccessMessage) {
-                                  ScaffoldMessenger.of(context).showSnackBar(
-                                      SnackBar(content: Text(message)));
+                                final message = Provider.of<TvDetailNotifier>(context, listen: false).watchlistMessage;
+                                if (message == TvDetailNotifier.tvWatchlistAddSuccessMessage ||
+                                    message == TvDetailNotifier.tvWatchlistRemoveSuccessMessage) {
+                                      ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(message)));
                                 } else {
                                   showDialog(
                                       context: context, builder: (context) {
@@ -292,7 +282,8 @@ class TvDetailContent extends StatelessWidget {
             );
           },
           itemCount: tvDetail.seasons.length,
-        ));
+        )
+    );
   }
 
   Widget _buildListRecommendation(List<Tv> recommendations) {

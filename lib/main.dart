@@ -6,8 +6,11 @@ import 'package:ditonton/presentation/pages/home_movie_page.dart';
 import 'package:ditonton/presentation/pages/popular_movies_page.dart';
 import 'package:ditonton/presentation/pages/search_page.dart';
 import 'package:ditonton/presentation/pages/top_rated_movies_page.dart';
+import 'package:ditonton/presentation/pages/tv/popular_tv_page.dart';
+import 'package:ditonton/presentation/pages/tv/top_rated_tv_page.dart';
 import 'package:ditonton/presentation/pages/tv/tv_detail_page.dart';
 import 'package:ditonton/presentation/pages/watchlist_movies_page.dart';
+import 'package:ditonton/presentation/pages/watchlist_page.dart';
 import 'package:ditonton/presentation/provider/home_notifier.dart';
 import 'package:ditonton/presentation/provider/movie_detail_notifier.dart';
 import 'package:ditonton/presentation/provider/movie_list_notifier.dart';
@@ -109,8 +112,6 @@ class MyApp extends StatelessWidget {
               return CupertinoPageRoute(builder: (_) => SearchPage(
                 activeDrawerItem: activeDrawerItem,
               ));
-            case WatchlistMoviesPage.ROUTE_NAME:
-              return MaterialPageRoute(builder: (_) => WatchlistMoviesPage());
             case AboutPage.ROUTE_NAME:
               return MaterialPageRoute(builder: (_) => AboutPage());
 
@@ -121,6 +122,13 @@ class MyApp extends StatelessWidget {
                 builder: (_) => TvDetailPage(id: id),
                 settings: settings
               );
+            case PopularTvPage.ROUTE_NAME:
+              return MaterialPageRoute(builder: (_) => PopularTvPage());
+            case TopRatedTvPage.ROUTE_NAME:
+              return MaterialPageRoute(builder: (_) => TopRatedTvPage());
+
+
+
             default:
               return MaterialPageRoute(builder: (_) {
                 return Scaffold(
