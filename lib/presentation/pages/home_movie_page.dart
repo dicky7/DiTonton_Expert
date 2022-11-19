@@ -16,6 +16,7 @@ import 'package:simple_ripple_animation/simple_ripple_animation.dart';
 import '../../common/drawer_item_enum.dart';
 
 class HomeMoviePage extends StatefulWidget {
+  static const ROUTE_NAME = "/home";
   @override
   _HomeMoviePageState createState() => _HomeMoviePageState();
 }

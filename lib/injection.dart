@@ -1,5 +1,4 @@
 import 'package:data_connection_checker/data_connection_checker.dart';
-import 'package:ditonton/common/network_info.dart';
 import 'package:ditonton/data/movie/datasources/db/database_helper.dart';
 import 'package:ditonton/data/movie/datasources/movie_local_data_source.dart';
 import 'package:ditonton/data/movie/datasources/movie_remote_data_source.dart';
@@ -34,6 +33,7 @@ import 'package:ditonton/presentation/provider/tv/popular_tv_notifier.dart';
 import 'package:ditonton/presentation/provider/tv/top_rated_tv_notifier.dart';
 import 'package:ditonton/presentation/provider/tv/tv_detail_notifier.dart';
 import 'package:ditonton/presentation/provider/tv/tv_list_notifier.dart';
+import 'package:ditonton/presentation/provider/tv/tv_on_air_notifier.dart';
 import 'package:ditonton/presentation/provider/tv/watchlist_tv_notifier.dart';
 import 'package:ditonton/presentation/provider/watchlist_movie_notifier.dart';
 import 'package:get_it/get_it.dart';
@@ -105,6 +105,11 @@ void init() {
     ),
   );
   locator.registerFactory(
+        () => TvOnAirNotifier(
+      getTvOnTheAir: locator(),
+    ),
+  );
+  locator.registerFactory(
         () => PopularTvNotifier(
       locator(),
     ),
@@ -119,6 +124,7 @@ void init() {
       locator(),
     ),
   );
+
   //provider home
   locator.registerFactory(
         () => HomeNotifier(),
@@ -154,7 +160,6 @@ void init() {
     () => MovieRepositoryImpl(
       remoteDataSource: locator(),
       localDataSource: locator(),
-      networkInfo: locator()
     ),
   );
   // repository tv
@@ -181,8 +186,6 @@ void init() {
   locator.registerLazySingleton<DatabaseHelper>(() => DatabaseHelper());
   locator.registerLazySingleton<TvDatabaseHelper>(() => TvDatabaseHelper());
 
-  //networkInfo
-  locator.registerLazySingleton<NetworkInfo>(() => NetworkInfoImpl(locator()));
 
   // external
   locator.registerLazySingleton(() => http.Client());

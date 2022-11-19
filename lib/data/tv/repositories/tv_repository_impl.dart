@@ -2,7 +2,6 @@ import 'dart:io';
 
 import 'package:dartz/dartz.dart';
 import 'package:ditonton/common/failure.dart';
-import 'package:ditonton/common/network_info.dart';
 import 'package:ditonton/data/tv/model/tv_table.dart';
 import 'package:ditonton/domain/tv/entities/tv.dart';
 import 'package:ditonton/domain/tv/entities/tv_detail.dart';

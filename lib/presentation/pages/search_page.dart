@@ -103,7 +103,7 @@ class SearchPage extends StatelessWidget {
           final tvShow = tvSearchResult[index];
           return ItemCard(
             activeDrawerItem: DrawerItem.TvShow,
-            routeName: MovieDetailPage.ROUTE_NAME,
+            routeName: TvDetailPage.ROUTE_NAME,
             tv: tvShow,
           );
         },

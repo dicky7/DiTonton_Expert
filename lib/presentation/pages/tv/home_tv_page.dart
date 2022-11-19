@@ -5,6 +5,7 @@ import 'package:ditonton/domain/tv/entities/tv.dart';
 import 'package:ditonton/presentation/pages/tv/popular_tv_page.dart';
 import 'package:ditonton/presentation/pages/tv/top_rated_tv_page.dart';
 import 'package:ditonton/presentation/pages/tv/tv_detail_page.dart';
+import 'package:ditonton/presentation/pages/tv/tv_on_air_page.dart';
 import 'package:ditonton/presentation/provider/tv/tv_list_notifier.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -73,10 +74,9 @@ class _HomeTvPageState extends State<HomeTvPage> with TickerProviderStateMixin {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       _buildCoverTv(value.tvOnTheAir[0]),
-                      Text(
-                        'Now On Air',
-                        style: kHeading6,
-                      ),
+                      _buildSubHeading(title: "Now On Air", onTap: () {
+                        Navigator.pushNamed(context, TvOnTheAirPage.ROUTE_NAME);
+                      }),
                       _buildTvList(value.tvOnTheAir),
                     ],
                   );

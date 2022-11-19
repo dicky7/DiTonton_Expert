@@ -62,31 +62,6 @@ final testMovieMap = {
   'title': 'title',
 };
 
-final testMovieFromCache = Movie.watchlist(
-  id: 557,
-  overview:
-  'After being bitten by a genetically altered spider, nerdy high school student Peter Parker is endowed with amazing powers to become the Amazing superhero known as Spider-Man.',
-  posterPath: '/rweIrveL43TaxUN0akQEaAXL6x0.jpg',
-  title: 'Spider-Man',
-);
-
-
-final testMovieCache = MovieTable(
-  id: 557,
-  overview:
-  'After being bitten by a genetically altered spider, nerdy high school student Peter Parker is endowed with amazing powers to become the Amazing superhero known as Spider-Man.',
-  posterPath: '/rweIrveL43TaxUN0akQEaAXL6x0.jpg',
-  title: 'Spider-Man',
-);
-
-final testMovieCacheMap = {
-  'id': 557,
-  'overview':
-  'After being bitten by a genetically altered spider, nerdy high school student Peter Parker is endowed with amazing powers to become the Amazing superhero known as Spider-Man.',
-  'posterPath': '/rweIrveL43TaxUN0akQEaAXL6x0.jpg',
-  'title': 'Spider-Man',
-};
-
 /**
  * TV DUMMY OBJECT
  */
@@ -109,20 +84,6 @@ final testTv = Tv(
 );
 
 final testTvList = [testTv];
-
-final testWatchlistTv = Tv.watchList(
-  id: 1,
-  name: 'name',
-  posterPath: 'posterPath',
-  overview: 'overview',
-);
-
-final testTvTable = TvTable(
-  id: 1,
-  name: 'name',
-  posterPath: 'posterPath',
-  overview: 'overview',
-);
 
 final testTvDetail = TvDetail(
     backdropPath: "backdropPath",
@@ -153,3 +114,24 @@ final testTvDetail = TvDetail(
     type: "type",
     voteAverage: 1,
     voteCount: 1);
+
+final testWatchlistTv = Tv.watchList(
+  id: 1,
+  name: 'name',
+  posterPath: 'posterPath',
+  overview: 'overview',
+);
+
+final testTvTable = TvTable(
+  id: 1,
+  name: 'name',
+  posterPath: 'posterPath',
+  overview: 'overview',
+);
+
+final testTvMap = {
+  'id': 1,
+  'name': 'name',
+  'posterPath': 'posterPath',
+  'title': 'title',
+};
