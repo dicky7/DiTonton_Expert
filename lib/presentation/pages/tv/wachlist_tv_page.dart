@@ -1,3 +1,4 @@
+import 'package:ditonton/common/utils.dart';
 import 'package:ditonton/presentation/pages/tv/tv_detail_page.dart';
 import 'package:ditonton/presentation/provider/tv/watchlist_tv_notifier.dart';
 import 'package:flutter/cupertino.dart';
@@ -13,11 +14,21 @@ class WatchlistTvPage extends StatefulWidget{
   State<WatchlistTvPage> createState() => _WatchlistTvPageState();
 }
 
-class _WatchlistTvPageState extends State<WatchlistTvPage> {
+class _WatchlistTvPageState extends State<WatchlistTvPage> with RouteAware {
   @override
   void initState() {
-    Provider.of<WatchlistTvNotifier>(context, listen: false).fetchWatchlistTv();
+    Future.microtask(() => Provider.of<WatchlistTvNotifier>(context, listen: false).fetchWatchlistTv());
     super.initState();
+  }
+
+  @override
+  void didChangeDependencies() {
+    routeObserver.subscribe(this, ModalRoute.of(context)!);
+    super.didChangeDependencies();
+  }
+
+  void didPopNext() {
+    Provider.of<WatchlistTvNotifier>(context, listen: false).fetchWatchlistTv();
   }
 
   @override
@@ -57,5 +68,11 @@ class _WatchlistTvPageState extends State<WatchlistTvPage> {
         },
       ),
     );
+  }
+
+  @override
+  void dispose() {
+    routeObserver.unsubscribe(this);
+    super.dispose();
   }
 }

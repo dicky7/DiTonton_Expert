@@ -14,14 +14,29 @@ class WatchlistMoviesPage extends StatefulWidget {
   _WatchlistMoviesPageState createState() => _WatchlistMoviesPageState();
 }
 
-class _WatchlistMoviesPageState extends State<WatchlistMoviesPage> {
+class _WatchlistMoviesPageState extends State<WatchlistMoviesPage>
+    with RouteAware {
   @override
   void initState() {
     super.initState();
+    Future.microtask(() => Future.microtask(() =>
+        Provider.of<WatchlistMovieNotifier>(context, listen: false).fetchWatchlistMovies()));
+  }
+
+  @override
+  void didChangeDependencies() {
+    routeObserver.subscribe(this, ModalRoute.of(context)!);
+    super.didChangeDependencies();
+  }
+
+  @override
+  void didPopNext() {
     Future.microtask(() =>
         Provider.of<WatchlistMovieNotifier>(context, listen: false)
             .fetchWatchlistMovies());
+    super.didPopNext();
   }
+
 
   @override
   Widget build(BuildContext context) {
@@ -34,7 +49,7 @@ class _WatchlistMoviesPageState extends State<WatchlistMoviesPage> {
               child: CircularProgressIndicator(),
             );
           } else if (data.watchlistState == RequestState.Loaded) {
-            if (data.watchlistMovies.length > 0 ) {
+            if (data.watchlistMovies.length > 0) {
               return ListView.builder(
                 itemBuilder: (context, index) {
                   final movie = data.watchlistMovies[index];
@@ -47,10 +62,9 @@ class _WatchlistMoviesPageState extends State<WatchlistMoviesPage> {
                 itemCount: data.watchlistMovies.length,
               );
             }
-            else{
+            else {
               return Center(child: Text("Tv Watchlist Empty"));
             }
-
           } else {
             return Center(
               key: Key('error_message'),
@@ -60,5 +74,11 @@ class _WatchlistMoviesPageState extends State<WatchlistMoviesPage> {
         },
       ),
     );
+  }
+
+  @override
+  void dispose() {
+    routeObserver.unsubscribe(this);
+    super.dispose();
   }
 }
