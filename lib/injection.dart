@@ -1,4 +1,4 @@
-import 'package:data_connection_checker/data_connection_checker.dart';
+
 import 'package:ditonton/data/movie/datasources/db/database_helper.dart';
 import 'package:ditonton/data/movie/datasources/movie_local_data_source.dart';
 import 'package:ditonton/data/movie/datasources/movie_remote_data_source.dart';
@@ -57,7 +57,7 @@ void init() {
       getTopRatedMovies: locator(),
     ),
   );
-  
+
   locator.registerFactory(
     () => MovieDetailNotifier(
       getMovieDetail: locator(),
