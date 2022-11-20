@@ -185,13 +185,9 @@ void main() {
         popularity: 1,
         posterPath: "posterPath",
         seasons: [
-          TvSeasonModel(airDate: "airDate",
-              episodeCount: 1,
+          TvSeasonModel(
               id: 1,
-              name: "name",
-              overview: "overview",
-              posterPath: "posterPath",
-              seasonNumber: 1)
+              posterPath: "posterPath",)
         ],
         status: "status",
         tagline: "tagline",

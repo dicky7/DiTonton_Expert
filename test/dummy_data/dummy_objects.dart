@@ -101,13 +101,9 @@ final testTvDetail = TvDetail(
     popularity: 1,
     posterPath: "posterPath",
     seasons: [
-      TvSeason(airDate: "airDate",
-          episodeCount: 1,
+      TvSeason(
           id: 1,
-          name: "name",
-          overview: "overview",
-          posterPath: "posterPath",
-          seasonNumber: 1)
+          posterPath: "posterPath")
     ],
     status: "status",
     tagline: "tagline",

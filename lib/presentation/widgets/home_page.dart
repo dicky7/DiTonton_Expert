@@ -1,5 +1,5 @@
-import 'package:ditonton/presentation/pages/about_page.dart';
-import 'package:ditonton/presentation/pages/watchlist_movies_page.dart';
+
+import 'package:about/about.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
