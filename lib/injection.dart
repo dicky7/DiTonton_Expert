@@ -190,5 +190,4 @@ void init() {
 
   // external
   locator.registerLazySingleton(() => http.Client());
-  locator.registerLazySingleton(() => DataConnectionChecker());
 }
