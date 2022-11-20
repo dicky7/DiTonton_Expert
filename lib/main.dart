@@ -136,7 +136,6 @@ class MyApp extends StatelessWidget {
               return MaterialPageRoute(builder: (_) => PopularTvPage());
             case TopRatedTvPage.ROUTE_NAME:
               return MaterialPageRoute(builder: (_) => TopRatedTvPage());
-
             default:
               return MaterialPageRoute(builder: (_) {
                 return Scaffold(
