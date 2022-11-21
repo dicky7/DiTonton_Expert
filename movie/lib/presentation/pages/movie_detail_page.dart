@@ -8,6 +8,7 @@ import 'package:provider/provider.dart';
 
 import '../../domain/entities/movie.dart';
 import '../../domain/entities/movie_detail.dart';
+import '../provider/movie_detail_notifier.dart';
 
 
 class MovieDetailPage extends StatefulWidget {
@@ -193,7 +194,7 @@ class DetailContent extends StatelessWidget {
                                             onTap: () {
                                               Navigator.pushReplacementNamed(
                                                 context,
-                                                MovieDetailPage.ROUTE_NAME,
+                                                MOVIE_DETAIL_ROUTE,
                                                 arguments: movie.id,
                                               );
                                             },

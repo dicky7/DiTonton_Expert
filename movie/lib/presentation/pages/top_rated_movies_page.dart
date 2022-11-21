@@ -1,6 +1,7 @@
 import 'package:core/core.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import '../provider/top_rated_movies_notifier.dart';
 import 'movie_detail_page.dart';
 
 class TopRatedMoviesPage extends StatefulWidget {

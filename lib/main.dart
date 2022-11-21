@@ -22,12 +22,13 @@ import 'package:tv/presentation/pages/popular_tv_page.dart';
 import 'package:tv/presentation/pages/top_rated_tv_page.dart';
 import 'package:tv/presentation/pages/tv_detail_page.dart';
 import 'package:tv/presentation/pages/tv_on_air_page.dart';
-import 'package:tv/presentation/provider/tv/popular_tv_notifier.dart';
-import 'package:tv/presentation/provider/tv/top_rated_tv_notifier.dart';
-import 'package:tv/presentation/provider/tv/tv_detail_notifier.dart';
-import 'package:tv/presentation/provider/tv/tv_list_notifier.dart';
-import 'package:tv/presentation/provider/tv/tv_on_air_notifier.dart';
-import 'package:tv/presentation/provider/tv/watchlist_tv_notifier.dart';
+import 'package:tv/presentation/provider/popular_tv_notifier.dart';
+import 'package:tv/presentation/provider/top_rated_tv_notifier.dart';
+import 'package:tv/presentation/provider/tv_detail_notifier.dart';
+import 'package:tv/presentation/provider/tv_list_notifier.dart';
+import 'package:tv/presentation/provider/tv_on_air_notifier.dart';
+import 'package:tv/presentation/provider/watchlist_tv_notifier.dart';
+
 
 
 void main() {

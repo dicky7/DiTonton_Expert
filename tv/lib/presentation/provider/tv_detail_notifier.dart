@@ -1,13 +1,17 @@
-import 'package:ditonton/common/state_enum.dart';
-import 'package:ditonton/domain/tv/entities/tv_detail.dart';
-import 'package:ditonton/domain/tv/usecase/get_tv_detail.dart';
-import 'package:ditonton/domain/tv/usecase/get_tv_recommendations.dart';
-import 'package:ditonton/domain/tv/usecase/get_watchlist_status_tv.dart';
-import 'package:ditonton/domain/tv/usecase/remove_watchlist_tv.dart';
-import 'package:ditonton/domain/tv/usecase/save_watchlist_tv.dart';
+import 'package:core/utils/state_enum.dart';
 import 'package:flutter/cupertino.dart';
 
-import '../../../domain/tv/entities/tv.dart';
+import '../../domain/entities/tv.dart';
+import 'package:flutter/cupertino.dart';
+
+import '../../domain/entities/tv_detail.dart';
+import '../../domain/usecase/get_tv_detail.dart';
+import '../../domain/usecase/get_tv_recommendations.dart';
+import '../../domain/usecase/get_watchlist_status_tv.dart';
+import '../../domain/usecase/remove_watchlist_tv.dart';
+import '../../domain/usecase/save_watchlist_tv.dart';
+
+
 
 class TvDetailNotifier extends ChangeNotifier {
   static const tvWatchlistAddSuccessMessage = 'Added to Watchlist';

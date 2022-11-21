@@ -5,6 +5,7 @@ import 'package:provider/provider.dart';
 import 'package:simple_ripple_animation/simple_ripple_animation.dart';
 
 import '../../domain/entities/movie.dart';
+import '../provider/movie_list_notifier.dart';
 
 
 class HomeMoviePage extends StatefulWidget {

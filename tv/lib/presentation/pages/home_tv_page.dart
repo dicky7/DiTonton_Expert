@@ -7,6 +7,7 @@ import 'package:provider/provider.dart';
 import 'package:simple_ripple_animation/simple_ripple_animation.dart';
 
 import '../../domain/entities/tv.dart';
+import '../provider/tv_list_notifier.dart';
 
 
 class HomeTvPage extends StatefulWidget {
@@ -90,7 +91,7 @@ class _HomeTvPageState extends State<HomeTvPage> with TickerProviderStateMixin {
                 }
               }),
               _buildSubHeading(title: "Top Rated", onTap: () {
-                Navigator.pushNamed(context, TopRatedTvPage.ROUTE_NAME);
+                Navigator.pushNamed(context, TOP_RATED_TV_ROUTE);
 
               }),
               Consumer<TvListNotifier>(builder: (context, value, child) {

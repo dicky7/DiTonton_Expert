@@ -38,12 +38,13 @@ import 'package:tv/domain/usecase/get_watchlist_status_tv.dart';
 import 'package:tv/domain/usecase/get_watchlist_tv.dart';
 import 'package:tv/domain/usecase/remove_watchlist_tv.dart';
 import 'package:tv/domain/usecase/save_watchlist_tv.dart';
-import 'package:tv/presentation/provider/tv/popular_tv_notifier.dart';
-import 'package:tv/presentation/provider/tv/top_rated_tv_notifier.dart';
-import 'package:tv/presentation/provider/tv/tv_detail_notifier.dart';
-import 'package:tv/presentation/provider/tv/tv_list_notifier.dart';
-import 'package:tv/presentation/provider/tv/tv_on_air_notifier.dart';
-import 'package:tv/presentation/provider/tv/watchlist_tv_notifier.dart';
+import 'package:tv/presentation/provider/popular_tv_notifier.dart';
+import 'package:tv/presentation/provider/top_rated_tv_notifier.dart';
+import 'package:tv/presentation/provider/tv_detail_notifier.dart';
+import 'package:tv/presentation/provider/tv_list_notifier.dart';
+import 'package:tv/presentation/provider/tv_on_air_notifier.dart';
+import 'package:tv/presentation/provider/watchlist_tv_notifier.dart';
+
 
 final locator = GetIt.instance;
 

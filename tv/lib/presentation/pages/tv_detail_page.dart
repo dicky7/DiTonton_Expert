@@ -6,6 +6,7 @@ import 'package:provider/provider.dart';
 
 import '../../domain/entities/tv.dart';
 import '../../domain/entities/tv_detail.dart';
+import '../provider/tv_detail_notifier.dart';
 
 
 class TvDetailPage extends StatefulWidget {

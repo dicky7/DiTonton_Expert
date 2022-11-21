@@ -3,7 +3,8 @@ import 'package:core/core.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import '../widgets/item_card_list.dart';
+
+import '../provider/popular_tv_notifier.dart';
 
 class PopularTvPage extends StatefulWidget {
   @override

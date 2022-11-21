@@ -1,7 +1,7 @@
 
-import 'package:core/data/tv/model/genre_model.dart';
-import 'package:core/data/tv/model/tv_season_model.dart';
+import 'package:core/data/models/genre_model.dart';
 import 'package:equatable/equatable.dart';
+import 'package:tv/data/model/tv_season_model.dart';
 
 import '../../domain/entities/tv_detail.dart';
 

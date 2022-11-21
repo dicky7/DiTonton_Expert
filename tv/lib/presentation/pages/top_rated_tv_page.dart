@@ -4,7 +4,8 @@ import 'package:core/utils/drawer_item_enum.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import '../widgets/item_card_list.dart';
+
+import '../provider/top_rated_tv_notifier.dart';
 
 class TopRatedTvPage extends StatefulWidget{
   @override

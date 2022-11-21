@@ -1,29 +1,27 @@
-import 'package:ditonton/domain/tv/entities/tv.dart';
+import 'package:core/utils/state_enum.dart';
 import 'package:flutter/cupertino.dart';
 
-import '../../../common/state_enum.dart';
-import '../../../domain/tv/usecase/get_popular_tv.dart';
+import '../../domain/entities/tv.dart';
+import '../../domain/usecase/get_watchlist_tv.dart';
 
-class PopularTvNotifier extends ChangeNotifier{
-  final GetPopularTv getPopularTv;
-
-  PopularTvNotifier(this.getPopularTv);
+class WatchlistTvNotifier extends ChangeNotifier{
+  final GetWatchListTv getWatchListTv;
+  WatchlistTvNotifier(this.getWatchListTv);
 
   RequestState _state = RequestState.Empty;
   RequestState get state => _state;
 
-  List<Tv> _tvShows = [];
-  List<Tv> get tvShow => _tvShows;
+  var _watchlistTv = <Tv>[];
+  List<Tv> get watchlistTv => _watchlistTv;
 
   String _message = '';
   String get message => _message;
 
-  Future<void> fetchPopularTv() async {
+  Future<void> fetchWatchlistTv() async {
     _state = RequestState.Loading;
     notifyListeners();
 
-    final result = await getPopularTv.execute();
-
+    final result = await getWatchListTv.execute();
     result.fold(
       (failure) {
         _message = failure.message;
@@ -32,7 +30,7 @@ class PopularTvNotifier extends ChangeNotifier{
       },
       (tvData) {
         _state = RequestState.Loaded;
-        _tvShows = tvData;
+        _watchlistTv = tvData;
         notifyListeners();
       },
     );

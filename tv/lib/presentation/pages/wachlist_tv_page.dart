@@ -3,6 +3,8 @@ import 'package:core/core.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
+import '../provider/watchlist_tv_notifier.dart';
+
 
 class WatchlistTvPage extends StatefulWidget{
   @override

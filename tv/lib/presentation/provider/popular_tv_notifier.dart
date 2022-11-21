@@ -1,13 +1,14 @@
-import 'package:ditonton/domain/tv/usecase/get_top_rated_tv.dart';
-import 'package:ditonton/presentation/provider/top_rated_movies_notifier.dart';
+
+import 'package:core/utils/state_enum.dart';
 import 'package:flutter/cupertino.dart';
 
-import '../../../common/state_enum.dart';
-import '../../../domain/tv/entities/tv.dart';
+import '../../domain/entities/tv.dart';
+import '../../domain/usecase/get_popular_tv.dart';
 
-class TopRatedTvNotifier extends ChangeNotifier{
-  final GetTopRatedTv getTopRatedTv;
-  TopRatedTvNotifier(this.getTopRatedTv);
+class PopularTvNotifier extends ChangeNotifier{
+  final GetPopularTv getPopularTv;
+
+  PopularTvNotifier(this.getPopularTv);
 
   RequestState _state = RequestState.Empty;
   RequestState get state => _state;
@@ -18,11 +19,11 @@ class TopRatedTvNotifier extends ChangeNotifier{
   String _message = '';
   String get message => _message;
 
-  Future<void> fetchTopRatedTv() async {
+  Future<void> fetchPopularTv() async {
     _state = RequestState.Loading;
     notifyListeners();
 
-    final result = await getTopRatedTv.execute();
+    final result = await getPopularTv.execute();
 
     result.fold(
       (failure) {

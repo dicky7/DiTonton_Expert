@@ -1,8 +1,8 @@
-import 'package:ditonton/domain/tv/usecase/get_tv_on_the_air.dart';
+import 'package:core/utils/state_enum.dart';
 import 'package:flutter/cupertino.dart';
 
-import '../../../common/state_enum.dart';
-import '../../../domain/tv/entities/tv.dart';
+import '../../domain/entities/tv.dart';
+import '../../domain/usecase/get_tv_on_the_air.dart';
 
 class TvOnAirNotifier extends ChangeNotifier{
   final GetTvOnTheAir getTvOnTheAir;

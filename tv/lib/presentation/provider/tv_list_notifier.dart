@@ -1,9 +1,12 @@
-import 'package:ditonton/common/state_enum.dart';
-import 'package:ditonton/domain/tv/entities/tv.dart';
-import 'package:ditonton/domain/tv/usecase/get_popular_tv.dart';
-import 'package:ditonton/domain/tv/usecase/get_top_rated_tv.dart';
-import 'package:ditonton/domain/tv/usecase/get_tv_on_the_air.dart';
+import 'package:core/utils/state_enum.dart';
 import 'package:flutter/cupertino.dart';
+
+import '../../domain/entities/tv.dart';
+import 'package:flutter/cupertino.dart';
+
+import '../../domain/usecase/get_popular_tv.dart';
+import '../../domain/usecase/get_top_rated_tv.dart';
+import '../../domain/usecase/get_tv_on_the_air.dart';
 
 class TvListNotifier extends ChangeNotifier{
   final GetTvOnTheAir getTvOnTheAir;
