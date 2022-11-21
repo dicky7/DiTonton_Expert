@@ -1,5 +1,6 @@
 
-import 'package:core/data/tv/model/genre_model.dart';
+
+import 'package:core/data/models/genre_model.dart';
 import 'package:equatable/equatable.dart';
 
 import '../../domain/entities/movie_detail.dart';

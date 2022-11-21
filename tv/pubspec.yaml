@@ -25,6 +25,8 @@ dependencies:
     path: ../core
 
 dev_dependencies:
+  mockito: ^5.3.2
+  build_runner: ^2.3.2
   flutter_test:
     sdk: flutter
   flutter_lints: ^2.0.0

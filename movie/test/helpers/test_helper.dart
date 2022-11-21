@@ -1,25 +1,16 @@
-import 'package:ditonton/data/movie/datasources/db/database_helper.dart';
-import 'package:ditonton/data/movie/datasources/movie_local_data_source.dart';
-import 'package:ditonton/data/movie/datasources/movie_remote_data_source.dart';
-import 'package:ditonton/data/tv/datasources/db/tv_database_helper.dart';
-import 'package:ditonton/data/tv/datasources/tv_local_data_source.dart';
-import 'package:ditonton/data/tv/datasources/tv_remote_data_source.dart';
-import 'package:ditonton/domain/movie/repositories/movie_repository.dart';
-import 'package:ditonton/domain/tv/repositories/tv_repository.dart';
+
 import 'package:mockito/annotations.dart';
 import 'package:http/http.dart' as http;
+import 'package:movie/data/datasources/db/database_helper.dart';
+import 'package:movie/data/datasources/movie_local_data_source.dart';
+import 'package:movie/data/datasources/movie_remote_data_source.dart';
+import 'package:movie/domain/repositories/movie_repository.dart';
 
 @GenerateMocks([
   MovieRepository,
   MovieRemoteDataSource,
   MovieLocalDataSource,
   DatabaseHelper,
-
-  TvRemoteDataSource,
-  TvLocalDataSource,
-  TvRepository,
-  TvDatabaseHelper,
-
 ], customMocks: [
   MockSpec<http.Client>(as: #MockHttpClient)
 ])

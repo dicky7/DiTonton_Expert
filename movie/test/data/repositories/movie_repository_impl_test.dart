@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:core/data/models/genre_model.dart';
 import 'package:core/utils/exception.dart';
 import 'package:core/utils/failure.dart';
 import 'package:dartz/dartz.dart';
@@ -61,13 +62,6 @@ void main() {
     voteCount: 13507,
   );
 
-  final testMovieCache = MovieTable(
-    id: 557,
-    overview:
-        'After being bitten by a genetically altered spider, nerdy high school student Peter Parker is endowed with amazing powers to become the Amazing superhero known as Spider-Man.',
-    posterPath: '/rweIrveL43TaxUN0akQEaAXL6x0.jpg',
-    title: 'Spider-Man',
-  );
 
   final tMovieModelList = <MovieModel>[tMovieModel];
   final tMovieList = <Movie>[tMovie];

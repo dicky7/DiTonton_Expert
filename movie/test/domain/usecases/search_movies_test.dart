@@ -1,8 +1,8 @@
+import 'package:core/domain/usecase/search_movies.dart';
 import 'package:dartz/dartz.dart';
-import 'package:ditonton/domain/movie/entities/movie.dart';
-import 'package:ditonton/domain/movie/usecases/search_movies.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/mockito.dart';
+import 'package:movie/domain/entities/movie.dart';
 
 import '../../helpers/test_helper.mocks.dart';
 
