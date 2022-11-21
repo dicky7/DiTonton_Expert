@@ -1,15 +1,18 @@
-import 'package:ditonton/common/state_enum.dart';
-import 'package:ditonton/domain/tv/entities/tv.dart';
-import 'package:ditonton/presentation/pages/tv/tv_on_air_page.dart';
-import 'package:ditonton/presentation/provider/tv/tv_on_air_notifier.dart';
+
+import 'package:core/utils/state_enum.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
 import 'package:provider/provider.dart';
+import 'package:tv/domain/entities/tv.dart';
+import 'package:tv/presentation/pages/tv_on_air_page.dart';
+import 'package:tv/presentation/provider/tv_on_air_notifier.dart';
 
-import 'tv/tv_on_air_page_test.mocks.dart';
+import 'tv_on_air_page_test.mocks.dart';
+
+
 
 @GenerateMocks([TvOnAirNotifier])
 void main(){

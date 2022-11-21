@@ -5,6 +5,8 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/mockito.dart';
 import 'package:movie/domain/entities/movie.dart';
 
+import '../../helpers/test_helper.mocks.dart';
+
 void main() {
   late SearchMovies usecase;
   late MockMovieRepository mockMovieRepository;

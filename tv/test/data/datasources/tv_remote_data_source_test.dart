@@ -1,16 +1,18 @@
 import 'dart:convert';
 import 'dart:io';
 
-import 'package:ditonton/common/exception.dart';
-import 'package:ditonton/data/tv/datasources/tv_remote_data_source.dart';
-import 'package:ditonton/data/tv/model/tv_detail_model.dart';
-import 'package:ditonton/data/tv/model/tv_response.dart';
+
+import 'package:core/utils/exception.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/mockito.dart';
 import 'package:http/http.dart' as http;
+import 'package:tv/data/datasources/tv_remote_data_source.dart';
+import 'package:tv/data/model/tv_detail_model.dart';
+import 'package:tv/data/model/tv_response.dart';
 
-import '../../../helpers/test_helper.mocks.dart';
-import '../../../json_reader.dart';
+import '../../helpers/test_helper.mocks.dart';
+import '../../json_reader.dart';
+
 
 void main() {
   const API_KEY = 'api_key=2174d146bb9c0eab47529b2e77d6b526';
@@ -26,8 +28,7 @@ void main() {
 
   group("get Tv On The Air", () {
     final tvList =
-        TvResponse.fromJson(json.decode(readJson("dummy_data/on_the_air.json")))
-            .tvList;
+        TvResponse.fromJson(json.decode(readJson("dummy_data/on_the_air.json"))).tvList;
 
     test('should return list of TVShow Model when the response code is 200',
         () async {

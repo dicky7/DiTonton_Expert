@@ -1,10 +1,9 @@
 import 'package:dartz/dartz.dart';
-import 'package:ditonton/domain/movie/entities/movie.dart';
-import 'package:ditonton/domain/movie/repositories/movie_repository.dart';
-import 'package:ditonton/common/failure.dart';
-import 'package:ditonton/domain/tv/usecase/get_watchlist_tv.dart';
+import 'package:tv/domain/entities/tv.dart';
+import 'package:tv/domain/usecase/get_popular_tv.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/mockito.dart';
+import 'package:tv/domain/usecase/get_watchlist_tv.dart';
 
 import '../../dummy_data/dummy_objects.dart';
 import '../../helpers/test_helper.mocks.dart';

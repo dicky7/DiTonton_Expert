@@ -4,6 +4,8 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/mockito.dart';
 import 'package:tv/domain/entities/tv.dart';
 
+import '../../helpers/test_helper.mocks.dart';
+
 
 
 void main() {

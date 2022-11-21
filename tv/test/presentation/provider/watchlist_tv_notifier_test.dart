@@ -1,14 +1,14 @@
+import 'package:core/core.dart';
 import 'package:dartz/dartz.dart';
-import 'package:ditonton/common/failure.dart';
-import 'package:ditonton/common/state_enum.dart';
-import 'package:ditonton/domain/tv/usecase/get_watchlist_tv.dart';
-import 'package:ditonton/presentation/provider/tv/watchlist_tv_notifier.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
+import 'package:tv/domain/usecase/get_watchlist_tv.dart';
+import 'package:tv/presentation/provider/watchlist_tv_notifier.dart';
 
 import '../../dummy_data/dummy_objects.dart';
-import 'tv/watchlist_tv_notifier_test.mocks.dart';
+import 'watchlist_tv_notifier_test.mocks.dart';
+
 
 @GenerateMocks([GetWatchListTv])
 void main(){

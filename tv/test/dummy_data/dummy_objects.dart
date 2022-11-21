@@ -1,4 +1,10 @@
 
+import 'package:core/domain/entities/genre.dart';
+import 'package:tv/data/model/tv_table.dart';
+import 'package:tv/domain/entities/tv.dart';
+import 'package:tv/domain/entities/tv_detail.dart';
+import 'package:tv/domain/entities/tv_season.dart';
+
 /**
  * TV DUMMY OBJECT
  */

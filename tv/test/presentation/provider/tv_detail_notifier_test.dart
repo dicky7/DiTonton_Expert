@@ -1,18 +1,19 @@
+import 'package:core/core.dart';
 import 'package:dartz/dartz.dart';
-import 'package:ditonton/common/failure.dart';
-import 'package:ditonton/common/state_enum.dart';
-import 'package:ditonton/domain/tv/usecase/get_tv_detail.dart';
-import 'package:ditonton/domain/tv/usecase/get_tv_recommendations.dart';
-import 'package:ditonton/domain/tv/usecase/get_watchlist_status_tv.dart';
-import 'package:ditonton/domain/tv/usecase/remove_watchlist_tv.dart';
-import 'package:ditonton/domain/tv/usecase/save_watchlist_tv.dart';
-import 'package:ditonton/presentation/provider/tv/tv_detail_notifier.dart';
+
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
+import 'package:tv/domain/usecase/get_tv_detail.dart';
+import 'package:tv/domain/usecase/get_tv_recommendations.dart';
+import 'package:tv/domain/usecase/get_watchlist_status_tv.dart';
+import 'package:tv/domain/usecase/remove_watchlist_tv.dart';
+import 'package:tv/domain/usecase/save_watchlist_tv.dart';
+import 'package:tv/presentation/provider/tv_detail_notifier.dart';
 
 import '../../dummy_data/dummy_objects.dart';
-import 'tv/tv_detail_notifier_test.mocks.dart';
+import 'tv_detail_notifier_test.mocks.dart';
+
 
 @GenerateMocks([
   GetTvDetail,

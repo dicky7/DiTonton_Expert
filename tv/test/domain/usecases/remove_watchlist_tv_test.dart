@@ -1,7 +1,9 @@
 import 'package:dartz/dartz.dart';
-import 'package:ditonton/domain/tv/usecase/remove_watchlist_tv.dart';
+import 'package:tv/domain/entities/tv.dart';
+import 'package:tv/domain/usecase/get_popular_tv.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/mockito.dart';
+import 'package:tv/domain/usecase/remove_watchlist_tv.dart';
 
 import '../../dummy_data/dummy_objects.dart';
 import '../../helpers/test_helper.mocks.dart';

@@ -1,15 +1,16 @@
-import 'package:ditonton/common/state_enum.dart';
-import 'package:ditonton/domain/tv/entities/tv.dart';
-import 'package:ditonton/presentation/pages/tv/tv_detail_page.dart';
-import 'package:ditonton/presentation/provider/tv/tv_detail_notifier.dart';
+
+import 'package:core/core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
 import 'package:provider/provider.dart';
+import 'package:tv/domain/entities/tv.dart';
+import 'package:tv/presentation/pages/tv_detail_page.dart';
+import 'package:tv/presentation/provider/tv_detail_notifier.dart';
 
 import '../../dummy_data/dummy_objects.dart';
-import 'tv/tv_detail_page_test.mocks.dart';
+import 'tv_detail_page_test.mocks.dart';
 
 @GenerateMocks([TvDetailNotifier])
 void main() {

@@ -11,6 +11,8 @@ import 'package:provider/provider.dart';
 
 import 'top_rated_movies_page_test.mocks.dart';
 
+
+
 @GenerateMocks([TopRatedMoviesNotifier])
 void main() {
   late MockTopRatedMoviesNotifier mockNotifier;
