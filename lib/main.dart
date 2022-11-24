@@ -1,12 +1,14 @@
 
 import 'package:about/about_page.dart';
 import 'package:core/core.dart';
+import 'package:core/presentation/bloc/searchMovie/search_bloc_movie.dart';
 import 'package:core/presentation/pages/search_page.dart';
 import 'package:core/presentation/provider/home_notifier.dart';
 import 'package:core/presentation/provider/search_notifier.dart';
 import 'package:core/styles/colors.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:movie/presentation/pages/home_movie_page.dart';
 import 'package:movie/presentation/pages/movie_detail_page.dart';
 import 'package:movie/presentation/pages/popular_movies_page.dart';
@@ -48,8 +50,8 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProvider(
           create: (_) => di.locator<MovieDetailNotifier>(),
         ),
-        ChangeNotifierProvider(
-          create: (_) => di.locator<SearchNotifier>(),
+        BlocProvider(
+          create: (_) => di.locator<SearchBlocMovie>(),
         ),
         ChangeNotifierProvider(
           create: (_) => di.locator<TopRatedMoviesNotifier>(),
@@ -86,6 +88,7 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProvider(
           create: (_) => di.locator<HomeNotifier>(),
         ),
+
       ],
       child: MaterialApp(
         title: 'Flutter Demo',

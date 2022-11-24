@@ -1,5 +1,9 @@
 
+import 'package:core/presentation/bloc/searchMovie/search_bloc_movie.dart';
+import 'package:core/presentation/bloc/searchMovie/search_event_movie.dart';
+import 'package:core/presentation/bloc/searchMovie/search_state_movie.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:movie/domain/entities/movie.dart';
 import 'package:provider/provider.dart';
 import 'package:tv/domain/entities/tv.dart';
@@ -32,13 +36,11 @@ class SearchPage extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             TextField(
-              onSubmitted: (query) {
+              onChanged: (query) {
                 if (activeDrawerItem == DrawerItem.Movie) {
-                  Provider.of<SearchNotifier>(context, listen: false)
-                      .fetchMovieSearch(query);
+                  context.read<SearchBlocMovie>().add(OnQueryChanged(query));
                 } else {
-                  Provider.of<SearchNotifier>(context, listen: false)
-                      .fetchTvSearch(query);
+
                 }
               },
               decoration: const InputDecoration(
@@ -53,43 +55,64 @@ class SearchPage extends StatelessWidget {
               'Search Result',
               style: kHeading6,
             ),
-            Consumer<SearchNotifier>(
-              builder: (context, data, child) {
-                if (data.state == RequestState.Loading) {
-                  return const Center(child: CircularProgressIndicator());
-                } else if (data.state == RequestState.Loaded) {
-                  if (activeDrawerItem == DrawerItem.Movie) {
-                    return _buildListMovie(data.movieSearchResult);
-                  } else{
-                    return _buildListTv(data.tvSearchResult);
-                  }
-                } else {
-                  return Expanded(
-                    child: Container(),
-                  );
-                }
-              },
-            ),
+            _buildSearchResult()
           ],
         ),
       ),
     );
   }
 
-  Widget _buildListMovie(List<Movie> movieSearchResult) {
-    return Expanded(
-      child: ListView.builder(
-        padding: const EdgeInsets.all(8),
-        itemBuilder: (context, index) {
-          final movie = movieSearchResult[index];
-          return ItemCard(
-            activeDrawerItem: DrawerItem.Movie,
-            routeName: MOVIE_DETAIL_ROUTE,
-            movie: movie,
+  Widget _buildSearchResult(){
+    if(activeDrawerItem == DrawerItem.Movie){
+      return _buildListMovie();
+    }else{
+      return _buildListMovie();
+    }
+  }
+
+  Widget _buildListMovie() {
+    return BlocBuilder<SearchBlocMovie, SearchStateMovie>(
+      builder: (context, state) {
+        if (state is SearchMovieLoading) {
+          return const Center(child: CircularProgressIndicator());
+        }
+        else if (state is SearchMovieHasData) {
+          final result = state.resultMovie;
+          return Expanded(
+            child: ListView.builder(
+              padding: const EdgeInsets.all(8),
+              itemBuilder: (context, index) {
+                final movie = result[index];
+                return ItemCard(
+                  activeDrawerItem: DrawerItem.Movie,
+                  routeName: MOVIE_DETAIL_ROUTE,
+                  movie: movie,
+                );
+              },
+              itemCount: result.length,
+            ),
           );
-        },
-        itemCount: movieSearchResult.length,
-      ),
+        }
+        else if(state is SearchMovieEmpty){
+          return Expanded(
+            child: Center(
+              child: Text("Movie Not Found"),
+            ),
+          );
+        }
+        else if(state is SearchMovieError){
+          return Expanded(
+            child: Center(
+              child: Text(state.message),
+            ),
+          );
+        }
+        else {
+          return Expanded(
+            child: Container(),
+          );
+        }
+      },
     );
   }
 

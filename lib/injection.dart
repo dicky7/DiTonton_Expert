@@ -1,6 +1,7 @@
 
 import 'package:core/domain/usecase/search_movies.dart';
 import 'package:core/domain/usecase/search_tv.dart';
+import 'package:core/presentation/bloc/searchMovie/search_bloc_movie.dart';
 import 'package:core/presentation/provider/home_notifier.dart';
 import 'package:core/presentation/provider/search_notifier.dart';
 import 'package:get_it/get_it.dart';
@@ -128,6 +129,13 @@ void init() {
   //provider home
   locator.registerFactory(
         () => HomeNotifier(),
+  );
+
+  //bloc
+  locator.registerFactory(
+       () => SearchBlocMovie(
+         locator()
+       )
   );
 
 

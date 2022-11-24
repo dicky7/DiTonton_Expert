@@ -39,6 +39,7 @@ dependencies:
   sqflite: ^2.2.0+3
   path_provider: ^2.0.11
   simple_ripple_animation: ^0.0.3
+  flutter_bloc: ^8.0.1
 
   about:
     path: about
