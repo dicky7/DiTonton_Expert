@@ -2,6 +2,7 @@
 import 'package:core/presentation/bloc/searchMovie/search_bloc_movie.dart';
 import 'package:core/presentation/bloc/searchMovie/search_event_movie.dart';
 import 'package:core/presentation/bloc/searchMovie/search_state_movie.dart';
+import 'package:core/presentation/bloc/searchTv/search_tv_bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:movie/domain/entities/movie.dart';
@@ -40,7 +41,7 @@ class SearchPage extends StatelessWidget {
                 if (activeDrawerItem == DrawerItem.Movie) {
                   context.read<SearchBlocMovie>().add(OnQueryChanged(query));
                 } else {
-
+                  context.read<SearchTvBloc>().add(OnQueryTvChanged(query));
                 }
               },
               decoration: const InputDecoration(
@@ -66,7 +67,7 @@ class SearchPage extends StatelessWidget {
     if(activeDrawerItem == DrawerItem.Movie){
       return _buildListMovie();
     }else{
-      return _buildListMovie();
+      return _buildListTv();
     }
   }
 
@@ -116,20 +117,51 @@ class SearchPage extends StatelessWidget {
     );
   }
 
-  Widget _buildListTv(List<Tv> tvSearchResult) {
-    return Expanded(
-      child: ListView.builder(
-        padding: const EdgeInsets.all(8),
-        itemBuilder: (context, index) {
-          final tvShow = tvSearchResult[index];
-          return ItemCard(
-            activeDrawerItem: DrawerItem.TvShow,
-            routeName: TV_DETAIL_ROUTE,
-            tv: tvShow,
+  Widget _buildListTv() {
+    return BlocBuilder<SearchTvBloc, SearchTvState>(
+      builder: (context, state) {
+        if (state is SearchTvLoading) {
+          return Center(
+            child: CircularProgressIndicator(),
           );
-        },
-        itemCount: tvSearchResult.length,
-      ),
+        }
+        else if (state is SearchTvHasData) {
+          final result = state.result;
+          return Expanded(
+            child: ListView.builder(
+              padding: const EdgeInsets.all(8),
+              itemBuilder: (context, index) {
+                final tvShow = result[index];
+                return ItemCard(
+                  activeDrawerItem: DrawerItem.TvShow,
+                  routeName: TV_DETAIL_ROUTE,
+                  tv: tvShow,
+                );
+              },
+              itemCount: result.length,
+            ),
+          );
+        }
+        else if(state is SearchTvEmpty){
+          return Expanded(
+            child: Center(
+              child: Text("Tv Not Found"),
+            ),
+          );
+        }
+        else if(state is SearchTvError){
+          return Expanded(
+            child: Center(
+              child: Text(state.message),
+            ),
+          );
+        }
+        else {
+          return Expanded(
+            child: Container(),
+          );
+        }
+      },
     );
   }
 }

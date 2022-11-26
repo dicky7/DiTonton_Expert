@@ -20,15 +20,17 @@ dependencies:
   sqflite: ^2.2.0+3
   path_provider: ^2.0.11
   simple_ripple_animation: ^0.0.3
+  flutter_bloc: ^8.0.1
 
   core:
     path: ../core
 dev_dependencies:
-  mockito: ^5.3.2
-  build_runner: ^2.3.2
   flutter_test:
     sdk: flutter
   flutter_lints: ^2.0.0
+  mockito: ^5.0.8
+  build_runner: ^2.0.4
+  bloc_test: ^9.0.0
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec

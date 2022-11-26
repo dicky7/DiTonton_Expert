@@ -1,69 +1,68 @@
-
-import 'package:core/utils/state_enum.dart';
+import 'package:core/presentation/widgets/item_card_list.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:mockito/annotations.dart';
-import 'package:mockito/mockito.dart';
-import 'package:movie/domain/entities/movie.dart';
+import 'package:mocktail/mocktail.dart';
+import 'package:movie/presentation/bloc/top_rated_movie/top_rated_movie_bloc.dart';
 import 'package:movie/presentation/pages/top_rated_movies_page.dart';
-import 'package:movie/presentation/provider/top_rated_movies_notifier.dart';
-import 'package:provider/provider.dart';
+import '../../dummy_data/dummy_objects.dart';
+import '../../helpers/pages/page_test_helper.dart';
 
-import 'top_rated_movies_page_test.mocks.dart';
-
-
-
-@GenerateMocks([TopRatedMoviesNotifier])
 void main() {
-  late MockTopRatedMoviesNotifier mockNotifier;
+  late FakeTopRatedMovieBloc fakeTopRatedMovieBloc;
 
   setUp(() {
-    mockNotifier = MockTopRatedMoviesNotifier();
+    fakeTopRatedMovieBloc = FakeTopRatedMovieBloc();
+    registerFallbackValue(FakeTopRatedMovieEvent());
+    registerFallbackValue(FakeTopRatedMovieState());
   });
 
   Widget _makeTestableWidget(Widget body) {
-    return ChangeNotifierProvider<TopRatedMoviesNotifier>.value(
-      value: mockNotifier,
+    return BlocProvider<TopRatedMovieBloc>(
+      create: (_) => fakeTopRatedMovieBloc,
       child: MaterialApp(
-        home: body,
+        home: Scaffold(
+          body: body,
+        ),
       ),
     );
   }
 
-  testWidgets('Page should display progress bar when loading',
-      (WidgetTester tester) async {
-    when(mockNotifier.state).thenReturn(RequestState.Loading);
-
-    final progressFinder = find.byType(CircularProgressIndicator);
-    final centerFinder = find.byType(Center);
-
-    await tester.pumpWidget(_makeTestableWidget(TopRatedMoviesPage()));
-
-    expect(centerFinder, findsOneWidget);
-    expect(progressFinder, findsOneWidget);
+  tearDown(() {
+    fakeTopRatedMovieBloc.close();
   });
 
-  testWidgets('Page should display when data is loaded',
+  testWidgets('page should display circular progress indicator when state is Loading',
       (WidgetTester tester) async {
-    when(mockNotifier.state).thenReturn(RequestState.Loaded);
-    when(mockNotifier.movies).thenReturn(<Movie>[]);
+    when(() => fakeTopRatedMovieBloc.state).thenReturn(TopRatedMovieLoading());
 
-    final listViewFinder = find.byType(ListView);
+    final circularProgressIndicatorFinder = find.byType(CircularProgressIndicator);
 
     await tester.pumpWidget(_makeTestableWidget(TopRatedMoviesPage()));
+    await tester.pump();
 
-    expect(listViewFinder, findsOneWidget);
+    expect(circularProgressIndicatorFinder, findsOneWidget);
   });
 
-  testWidgets('Page should display text with message when Error',
+  testWidgets('Page should display listView & itemCard when state is Has Data',
       (WidgetTester tester) async {
-    when(mockNotifier.state).thenReturn(RequestState.Error);
-    when(mockNotifier.message).thenReturn('Error message');
-
-    final textFinder = find.byKey(Key('error_message'));
-
+    when(() => fakeTopRatedMovieBloc.state).thenReturn(TopRatedMovieHasData(testMovieList));
     await tester.pumpWidget(_makeTestableWidget(TopRatedMoviesPage()));
 
-    expect(textFinder, findsOneWidget);
+    expect(find.byType(ListView), findsOneWidget);
+    expect(find.byType(ItemCard), findsOneWidget);
+    expect(find.byKey(const Key('top_rated_content')), findsOneWidget);
+  });
+
+  testWidgets('should display text with message when state is Error',
+      (WidgetTester tester) async {
+    when(() => fakeTopRatedMovieBloc.state).thenReturn(TopRatedMovieError("error"));
+
+    final textMessageKeyFinder = find.byKey(const Key('error'));
+    await tester.pumpWidget(_makeTestableWidget(TopRatedMoviesPage()));
+    await tester.pump();
+
+    expect(textMessageKeyFinder, findsOneWidget);
   });
 }

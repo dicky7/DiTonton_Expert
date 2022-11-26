@@ -199,6 +199,7 @@ class TvDetailContent extends StatelessWidget {
                                     return Container();
                                   }
                                 }),
+                            SizedBox(height: 16),
                             Text(
                               'Season Tv Show',
                               style: kHeading6,
