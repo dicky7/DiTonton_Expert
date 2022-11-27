@@ -41,12 +41,13 @@ import 'package:tv/domain/usecase/get_watchlist_status_tv.dart';
 import 'package:tv/domain/usecase/get_watchlist_tv.dart';
 import 'package:tv/domain/usecase/remove_watchlist_tv.dart';
 import 'package:tv/domain/usecase/save_watchlist_tv.dart';
-import 'package:tv/presentation/provider/popular_tv_notifier.dart';
-import 'package:tv/presentation/provider/top_rated_tv_notifier.dart';
-import 'package:tv/presentation/provider/tv_detail_notifier.dart';
-import 'package:tv/presentation/provider/tv_list_notifier.dart';
-import 'package:tv/presentation/provider/tv_on_air_notifier.dart';
-import 'package:tv/presentation/provider/watchlist_tv_notifier.dart';
+import 'package:tv/presentation/bloc/popular_tv/popular_tv_bloc.dart';
+import 'package:tv/presentation/bloc/top_rated_tv/top_rated_tv_bloc.dart';
+import 'package:tv/presentation/bloc/tv_detail/tv_detail_bloc.dart';
+import 'package:tv/presentation/bloc/tv_detail/tv_recommendation/tv_recommendation_bloc.dart';
+import 'package:tv/presentation/bloc/tv_on_air/tv_on_air_bloc.dart';
+import 'package:tv/presentation/bloc/watclist_tv/watchlist_tv_bloc.dart';
+
 
 
 final locator = GetIt.instance;
@@ -95,19 +96,28 @@ void init() {
 
   // provider tv
   locator.registerFactory(
-        () => TvListNotifier(
-      getTvOnTheAir: locator(),
-      getPopularTv: locator(),
-      getTopRatedTv: locator(),
+    () => TvOnAirBloc(
+       locator()
     ),
   );
   locator.registerFactory(
-        () => TvDetailNotifier(
-      getTvDetail: locator(),
-      getTvRecommendations: locator(),
-      getWatchListStatusTv: locator(),
-      saveWatchListTv: locator(),
-      removeWatchListTv: locator(),
+    () => PopularTvBloc(
+      locator()
+    ),
+  );
+  locator.registerFactory(
+    () => TopRatedTvBloc(
+      locator()
+    ),
+  );
+  locator.registerFactory(
+    () => TvDetailBloc(
+      locator()
+    ),
+  );
+  locator.registerFactory(
+    () => TvRecommendationBloc(
+      locator()
     ),
   );
   locator.registerFactory(
@@ -116,22 +126,10 @@ void init() {
     ),
   );
   locator.registerFactory(
-        () => TvOnAirNotifier(
-      getTvOnTheAir: locator(),
-    ),
-  );
-  locator.registerFactory(
-        () => PopularTvNotifier(
+    () => WatchlistTvBloc(
       locator(),
-    ),
-  );
-  locator.registerFactory(
-        () => TopRatedTvNotifier(
       locator(),
-    ),
-  );
-  locator.registerFactory(
-        () => WatchlistTvNotifier(
+      locator(),
       locator(),
     ),
   );

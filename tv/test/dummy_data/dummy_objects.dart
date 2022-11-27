@@ -30,16 +30,9 @@ final testTvList = [testTv];
 
 final testTvDetail = TvDetail(
     backdropPath: "backdropPath",
-    episodeRunTime: [2],
-    firstAirDate: "firstAirDate",
     genres: [Genre(id: 1, name: 'Action')],
-    homepage: "homepage",
     id: 1,
     name: "name",
-    numberOfEpisodes: 1,
-    numberOfSeasons: 1,
-    originalLanguage: "us",
-    originalName: "originalName",
     overview: "overview",
     popularity: 1,
     posterPath: "posterPath",
@@ -48,9 +41,6 @@ final testTvDetail = TvDetail(
           id: 1,
           posterPath: "posterPath")
     ],
-    status: "status",
-    tagline: "tagline",
-    type: "type",
     voteAverage: 1,
     voteCount: 1);
 

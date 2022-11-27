@@ -22,24 +22,24 @@ class WatchlistMovieBloc
   final SaveWatchlist _saveWatchlist;
 
   WatchlistMovieBloc(
-      this._getWatchlistMovies,
-      this._getWatchListStatus,
-      this._removeWatchlist,
-      this._saveWatchlist,) : super(WatchlistMovieEmpty()) {
+    this._getWatchlistMovies,
+    this._getWatchListStatus,
+    this._removeWatchlist,
+    this._saveWatchlist,
+  ) : super(WatchlistMovieEmpty()) {
 
     on<WatchlistMovieList>((event, emit) async {
       emit(WatchlistMovieLoading());
       final result = await _getWatchlistMovies.execute();
 
-      result.fold(
-              (failure) => emit(WatchlistMovieError(failure.message)),
-              (data) {
-            if (data.isEmpty) {
-              emit(WatchlistMovieEmpty());
-            } else {
-              emit(WatchlistMovieHasData(data));
-            }
-          });
+      result.fold((failure) => emit(WatchlistMovieError(failure.message)),
+          (data) {
+        if (data.isEmpty) {
+          emit(WatchlistMovieEmpty());
+        } else {
+          emit(WatchlistMovieHasData(data));
+        }
+      });
     });
 
     on<WatchlistMovieAdd>((event, emit) async {
@@ -48,8 +48,8 @@ class WatchlistMovieBloc
       final result = await _saveWatchlist.execute(movieDetail);
 
       result.fold(
-            (failure) => emit(WatchlistMovieError(failure.message)),
-            (successMessage) => emit(WatchlistMovieMessage(successMessage)),
+        (failure) => emit(WatchlistMovieError(failure.message)),
+        (successMessage) => emit(WatchlistMovieMessage(successMessage)),
       );
     });
 
@@ -59,8 +59,8 @@ class WatchlistMovieBloc
       final result = await _removeWatchlist.execute(movieDetail);
 
       result.fold(
-            (failure) => emit(WatchlistMovieError(failure.message)),
-            (successMessage) => emit(WatchlistMovieMessage(successMessage)),
+        (failure) => emit(WatchlistMovieError(failure.message)),
+        (successMessage) => emit(WatchlistMovieMessage(successMessage)),
       );
     });
 
@@ -70,6 +70,5 @@ class WatchlistMovieBloc
       final result = await _getWatchListStatus.execute(id);
       emit(MovieIsAddedToWatchlist(result));
     });
-
   }
 }

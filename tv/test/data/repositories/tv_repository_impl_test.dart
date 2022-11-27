@@ -171,16 +171,9 @@ void main() {
     final tId = 1;
     var tTvDetail = TvDetailModel(
         backdropPath: "backdropPath",
-        episodeRunTime: [2],
-        firstAirDate: "firstAirDate",
         genres: [GenreModel(id: 1, name: 'Action')],
-        homepage: "homepage",
         id: 1,
         name: "name",
-        numberOfEpisodes: 1,
-        numberOfSeasons: 1,
-        originalLanguage: "us",
-        originalName: "originalName",
         overview: "overview",
         popularity: 1,
         posterPath: "posterPath",
@@ -189,9 +182,6 @@ void main() {
               id: 1,
               posterPath: "posterPath",)
         ],
-        status: "status",
-        tagline: "tagline",
-        type: "type",
         voteAverage: 1,
         voteCount: 1);
 

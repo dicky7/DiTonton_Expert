@@ -18,8 +18,7 @@ class HomeMoviePage extends StatefulWidget {
   _HomeMoviePageState createState() => _HomeMoviePageState();
 }
 
-class _HomeMoviePageState extends State<HomeMoviePage>
-    with TickerProviderStateMixin {
+class _HomeMoviePageState extends State<HomeMoviePage> with TickerProviderStateMixin {
   late AnimationController _controller;
 
   @override
@@ -200,24 +199,16 @@ class _HomeMoviePageState extends State<HomeMoviePage>
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              RippleAnimation(
-                repeat: true,
-                color: Colors.red,
-                minRadius: 15,
-                ripplesCount: 3,
-                child: const Icon(
-                  Icons.circle,
-                  color: Colors.redAccent,
-                  size: 16.0,
-                ),
+              const Icon(
+                Icons.circle,
+                color: Colors.redAccent,
+                size: 18.0,
               ),
-              const SizedBox(width: 8.0),
+              const SizedBox(width: 8),
               Text(
-                'Now Playing'.toUpperCase(),
-                style: const TextStyle(
-                  fontSize: 16.0,
-                ),
-              ),
+                "Now Playing".toUpperCase(),
+                style: kHeading6,
+              )
             ],
           )
         ],

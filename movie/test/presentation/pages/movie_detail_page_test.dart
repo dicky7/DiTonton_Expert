@@ -1,15 +1,11 @@
-import 'package:core/utils/state_enum.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
-import 'package:movie/domain/entities/movie.dart';
 import 'package:movie/presentation/bloc/movie_detail/movie_detail_bloc.dart';
 import 'package:movie/presentation/bloc/movie_detail/recommendation/movie_recommendation_bloc.dart';
 import 'package:movie/presentation/bloc/watchlist_movie/watchlist_movie_bloc.dart';
 import 'package:movie/presentation/pages/movie_detail_page.dart';
-
-import 'package:provider/provider.dart';
 
 import '../../dummy_data/dummy_objects.dart';
 import '../../helpers/pages/page_test_helper.dart';

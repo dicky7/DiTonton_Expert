@@ -3,36 +3,28 @@ import 'dart:math';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:core/core.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:provider/provider.dart';
 import 'package:simple_ripple_animation/simple_ripple_animation.dart';
+import 'package:tv/presentation/bloc/popular_tv/popular_tv_bloc.dart';
 
 import '../../domain/entities/tv.dart';
-import '../provider/tv_list_notifier.dart';
-
+import '../bloc/top_rated_tv/top_rated_tv_bloc.dart';
+import '../bloc/tv_on_air/tv_on_air_bloc.dart';
 
 class HomeTvPage extends StatefulWidget {
   @override
   State<HomeTvPage> createState() => _HomeTvPageState();
 }
 
-class _HomeTvPageState extends State<HomeTvPage> with TickerProviderStateMixin {
-  late AnimationController _controller;
-
-  @override
-  void dispose() {
-    super.dispose();
-    _controller.dispose();
-  }
-
+class _HomeTvPageState extends State<HomeTvPage> {
   @override
   void initState() {
-    _controller =
-        AnimationController(vsync: this, duration: Duration(milliseconds: 2000))
-          ..repeat();
-    Future.microtask(() => Provider.of<TvListNotifier>(context, listen: false)
-      ..fetchTopRatedTv()
-      ..fetchTvPopular()
-      ..fetchTvOnTheAir());
+    Future.microtask(() {
+      context.read<TvOnAirBloc>().add(FetchTvOnAir());
+      context.read<PopularTvBloc>().add(FetchPopularTv());
+      context.read<TopRatedTvBloc>().add(FetchTopRatedTv());
+    });
     super.initState();
   }
 
@@ -45,7 +37,8 @@ class _HomeTvPageState extends State<HomeTvPage> with TickerProviderStateMixin {
         actions: [
           IconButton(
             onPressed: () {
-              Navigator.pushNamed(context, SEARCH_ROUTE, arguments: DrawerItem.TvShow);
+              Navigator.pushNamed(context, SEARCH_ROUTE,
+                  arguments: DrawerItem.TvShow);
             },
             icon: const Icon(Icons.search),
           )
@@ -57,53 +50,19 @@ class _HomeTvPageState extends State<HomeTvPage> with TickerProviderStateMixin {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Consumer<TvListNotifier>(builder: (context, value, child) {
-                final state = value.tvOnTheAirState;
-                if (state == RequestState.Loading) {
-                  return const Center(child: CircularProgressIndicator());
-                } else if (state == RequestState.Loaded) {
-                  return Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      _buildCoverTv(value.tvOnTheAir[0]),
-                      _buildSubHeading(title: "Now On Air", onTap: () {
-                        Navigator.pushNamed(context, TV_ON_AIR_ROUTE);
-                      }),
-                      _buildTvList(value.tvOnTheAir),
-                    ],
-                  );
-                } else {
-                  return Center(child: Text(value.message));
-                }
-              }),
-              _buildSubHeading(title: "Popular", onTap: () {
-                Navigator.pushNamed(context, POPULAR_TV_ROUTE);
-              }),
-
-              Consumer<TvListNotifier>(builder: (context, value, child) {
-                final state = value.popularTvState;
-                if (state == RequestState.Loading) {
-                  return const Center(child: CircularProgressIndicator());
-                } else if (state == RequestState.Loaded) {
-                  return _buildTvList(value.popularTv);
-                } else {
-                  return Center(child: Text(value.message));
-                }
-              }),
-              _buildSubHeading(title: "Top Rated", onTap: () {
-                Navigator.pushNamed(context, TOP_RATED_TV_ROUTE);
-
-              }),
-              Consumer<TvListNotifier>(builder: (context, value, child) {
-                final state = value.topRatedTvState;
-                if (state == RequestState.Loading) {
-                  return const Center(child: CircularProgressIndicator());
-                } else if (state == RequestState.Loaded) {
-                  return _buildTvList(value.topRatedTv);
-                } else {
-                  return Center(child: Text(value.message));
-                }
-              }),
+              _buildTvOnAir(),
+              _buildSubHeading(
+                  title: "Popular",
+                  onTap: () {
+                    Navigator.pushNamed(context, POPULAR_TV_ROUTE);
+                  }),
+              _buildPopularTv(),
+              _buildSubHeading(
+                  title: "Top Rated",
+                  onTap: () {
+                    Navigator.pushNamed(context, TOP_RATED_TV_ROUTE);
+                  }),
+              _buildTopRatedTv(),
             ],
           ),
         ),
@@ -111,14 +70,91 @@ class _HomeTvPageState extends State<HomeTvPage> with TickerProviderStateMixin {
     );
   }
 
+  Widget _buildTopRatedTv() {
+    return BlocBuilder<TopRatedTvBloc, TopRatedTvState>(
+      builder: (context, state) {
+        if (state is TopRatedTvLoading) {
+          return const Center(child: CircularProgressIndicator());
+        } else if (state is TopRatedTvHasData) {
+          return _buildTvList(state.result);
+        } else if (state is TopRatedTvEmpty) {
+          return const Center(
+            child: Text("Tv Empty", key: Key("empty")),
+          );
+        } else if (state is TopRatedTvError) {
+          return Center(child: Text(state.message, key: Key("error")));
+        } else {
+          return const Center(
+            child: Text('Failed', key: Key("failed")),
+          );
+        }
+      },
+    );
+  }
+
+  Widget _buildPopularTv() {
+    return BlocBuilder<PopularTvBloc, PopularTvState>(
+      builder: (context, state) {
+        if (state is PopularTvLoading) {
+          return const Center(child: CircularProgressIndicator());
+        } else if (state is PopularTvHasData) {
+          return _buildTvList(state.result);
+        } else if (state is PopularTvEmpty) {
+          return const Center(
+            child: Text("Tv Empty", key: Key("empty")),
+          );
+        } else if (state is PopularTvError) {
+          return Center(child: Text(state.message, key: Key("error")));
+        } else {
+          return const Center(
+            child: Text('Failed', key: Key("failed")),
+          );
+        }
+      },
+    );
+  }
+
+  Widget _buildTvOnAir() {
+    return BlocBuilder<TvOnAirBloc, TvOnAirState>(
+      builder: (context, state) {
+        if (state is TvOnAirLoading) {
+          return const Center(child: CircularProgressIndicator());
+        } else if (state is TvOnAirHasData) {
+          return Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              _buildCoverTv(state.result[0]),
+              _buildSubHeading(
+                  title: "Now On Air",
+                  onTap: () {
+                    Navigator.pushNamed(context, TV_ON_AIR_ROUTE);
+                  }),
+              _buildTvList(state.result),
+            ],
+          );
+        } else if (state is TvOnAirEmpty) {
+          return const Center(
+            child: Text("Tv Empty", key: Key("empty")),
+          );
+        } else if (state is TvOnAirError) {
+          return Center(
+              child: Text(
+            state.message,
+            key: Key("error"),
+          ));
+        } else {
+          return const Center(
+            child: Text('Failed', key: Key("failed")),
+          );
+        }
+      },
+    );
+  }
+
   Widget _buildCoverTv(Tv tvShow) {
     return GestureDetector(
       onTap: () {
-        Navigator.pushNamed(
-            context,
-            TV_DETAIL_ROUTE,
-            arguments: tvShow.id
-        );
+        Navigator.pushNamed(context, TV_DETAIL_ROUTE, arguments: tvShow.id);
       },
       child: Stack(
         alignment: Alignment.center,
@@ -146,21 +182,15 @@ class _HomeTvPageState extends State<HomeTvPage> with TickerProviderStateMixin {
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              RippleAnimation(
-                repeat: true,
-                color: Colors.red,
-                minRadius: 15,
-                ripplesCount: 3,
-                child: const Icon(
-                  Icons.circle,
-                  color: Colors.redAccent,
-                  size: 16,
-                ),
+              const Icon(
+                Icons.circle,
+                color: Colors.redAccent,
+                size: 18.0,
               ),
               const SizedBox(width: 8),
               Text(
                 "Tv On The Air".toUpperCase(),
-                style: const TextStyle(fontSize: 16.0),
+                style: kHeading6,
               )
             ],
           )
@@ -182,10 +212,7 @@ class _HomeTvPageState extends State<HomeTvPage> with TickerProviderStateMixin {
           child: Padding(
             padding: const EdgeInsets.all(8.0),
             child: Row(
-              children: const [
-                Text('See More'),
-                Icon(Icons.arrow_forward_ios)
-              ],
+              children: const [Text('See More'), Icon(Icons.arrow_forward_ios)],
             ),
           ),
         ),
@@ -204,17 +231,14 @@ class _HomeTvPageState extends State<HomeTvPage> with TickerProviderStateMixin {
             padding: const EdgeInsets.all(8),
             child: InkWell(
               onTap: () {
-                Navigator.pushNamed(
-                  context,
-                  TV_DETAIL_ROUTE,
-                  arguments: tv.id
-                );
+                Navigator.pushNamed(context, TV_DETAIL_ROUTE, arguments: tv.id);
               },
               child: ClipRRect(
                 borderRadius: const BorderRadius.all(Radius.circular(16)),
                 child: CachedNetworkImage(
                   imageUrl: '$BASE_IMAGE_URL${tv.posterPath}',
-                  placeholder: (context, url) => const Center(child: CircularProgressIndicator()),
+                  placeholder: (context, url) =>
+                      const Center(child: CircularProgressIndicator()),
                   errorWidget: (context, url, error) => const Icon(Icons.error),
                 ),
               ),

@@ -146,7 +146,6 @@ class _DetailContentState extends State<DetailContent> {
                                       : watchlistRemoveSuccessMessage;
                                 }
 
-
                                 if (message == watchlistAddSuccessMessage ||
                                     message == watchlistRemoveSuccessMessage) {
                                   ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(message)));

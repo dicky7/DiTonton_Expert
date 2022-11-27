@@ -74,18 +74,18 @@ void main() {
     expect(progressBarFinder, findsNWidgets(3));
   });
 
-  // testWidgets('Page should display listView when state is Has Data',
-  //     (widgetTester) async {
-  //   when(() => fakeNowPlayingMovieBloc.state).thenReturn(NowPlayingMovieHasData(testMovieList));
-  //   when(() => fakeTopRatedMovieBloc.state).thenReturn(TopRatedMovieHasData(testMovieList));
-  //   when(() => fakePopularMovieBloc.state).thenReturn(PopularMovieHasData(testMovieList));
-  //
-  //   final listViewFinder = find.byType(ListView);
-  //
-  //   await widgetTester.pumpWidget(_createTestableWidget(HomeMoviePage()));
-  //
-  //   expect(listViewFinder, findsWidgets);
-  // });
+  testWidgets('Page should display listView when state is Has Data',
+      (widgetTester) async {
+    when(() => fakeNowPlayingMovieBloc.state).thenReturn(NowPlayingMovieHasData(testMovieList));
+    when(() => fakeTopRatedMovieBloc.state).thenReturn(TopRatedMovieHasData(testMovieList));
+    when(() => fakePopularMovieBloc.state).thenReturn(PopularMovieHasData(testMovieList));
+
+    final listViewFinder = find.byType(ListView);
+
+    await widgetTester.pumpWidget(_makeTestableWidget(HomeMoviePage()));
+
+    expect(listViewFinder, findsWidgets);
+  });
 
 
   testWidgets('page should display error with text when state is Error',

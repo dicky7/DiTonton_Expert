@@ -1,30 +1,27 @@
 
-import 'package:core/utils/state_enum.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:mockito/annotations.dart';
-import 'package:mockito/mockito.dart';
-import 'package:provider/provider.dart';
-import 'package:tv/domain/entities/tv.dart';
+import 'package:mocktail/mocktail.dart';
+import 'package:tv/presentation/bloc/tv_on_air/tv_on_air_bloc.dart';
 import 'package:tv/presentation/pages/tv_on_air_page.dart';
-import 'package:tv/presentation/provider/tv_on_air_notifier.dart';
 
-import 'tv_on_air_page_test.mocks.dart';
+import '../../dummy_data/dummy_objects.dart';
+import '../../dummy_data/pages/page_tv_test_helper.dart';
 
-
-
-@GenerateMocks([TvOnAirNotifier])
 void main(){
-  late MockTvOnAirNotifier mockTvOnAirNotifier;
+  late FakeTvOnAirBloc fakeTvOnAirBloc;
 
   setUp((){
-    mockTvOnAirNotifier = MockTvOnAirNotifier();
+    fakeTvOnAirBloc = FakeTvOnAirBloc();
+    registerFallbackValue(FakeTvOnAirEvent());
+    registerFallbackValue(FakeTvOnAirState());
   });
 
   Widget _makeTestAbleWidget(Widget body){
-    return ChangeNotifierProvider<TvOnAirNotifier>.value(
-      value: mockTvOnAirNotifier,
+    return BlocProvider<TvOnAirBloc>(
+      create: (context) => fakeTvOnAirBloc,
       child: MaterialApp(
         home: body,
       ),
@@ -32,7 +29,7 @@ void main(){
   }
 
   testWidgets('Page should display center progress bar when loading', (widgetTester) async{
-    when(mockTvOnAirNotifier.tvOnTheAirState).thenReturn(RequestState.Loading);
+    when(() => fakeTvOnAirBloc.state).thenReturn(TvOnAirLoading());
 
     final progressBarFinder = find.byType(CircularProgressIndicator);
     final centerFinder = find.byType(Center);
@@ -44,8 +41,7 @@ void main(){
   });
 
   testWidgets('Page should display ListView when data is loaded', (widgetTester) async{
-    when(mockTvOnAirNotifier.tvOnTheAirState).thenReturn(RequestState.Loaded);
-    when(mockTvOnAirNotifier.tvOnTheAir).thenReturn(<Tv>[]);
+    when(() => fakeTvOnAirBloc.state).thenReturn(TvOnAirHasData(testTvList));
 
     final listViewFinder = find.byType(ListView);
 
@@ -55,10 +51,9 @@ void main(){
   });
 
   testWidgets('Page should display text with message when Error', (widgetTester) async{
-    when(mockTvOnAirNotifier.tvOnTheAirState).thenReturn(RequestState.Error);
-    when(mockTvOnAirNotifier.message).thenReturn("Error message");
+    when(() => fakeTvOnAirBloc.state).thenReturn(TvOnAirError("error"));
 
-    final textFinder = find.byKey(Key("error_message"));
+    final textFinder = find.byKey(Key("error"));
 
     await widgetTester.pumpWidget(_makeTestAbleWidget(TvOnTheAirPage()));
     expect(textFinder, findsOneWidget);

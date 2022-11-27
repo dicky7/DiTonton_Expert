@@ -1,0 +1,28 @@
+{
+  "page": 1,
+  "results": [{
+    "adult": false,
+    "backdrop_path": "/8Xs20y8gFR0W9u8Yy9NKdpZtSu7.jpg",
+    "id": 99966,
+    "name": "All of Us Are Dead",
+    "original_language": "ko",
+    "original_name": "지금 우리 학교는",
+    "overview": "A high school becomes ground zero for a zombie virus outbreak. Trapped students must fight their way out — or turn into one of the rabid infected.",
+    "poster_path": "/6zUUtzj7aJzOdoxhpiGzEKYtj1o.jpg",
+    "media_type": "tv",
+    "genre_ids": [
+      10759,
+      18,
+      10765
+    ],
+    "popularity": 360.332,
+    "first_air_date": "2022-01-28",
+    "vote_average": 8.421,
+    "vote_count": 2750,
+    "origin_country": [
+      "KR"
+    ]
+  }],
+  "total_pages": 2,
+  "total_results": 40
+}

@@ -22,16 +22,17 @@ import 'package:movie/presentation/pages/popular_movies_page.dart';
 import 'package:movie/presentation/pages/top_rated_movies_page.dart';
 import 'package:provider/provider.dart';
 import 'package:ditonton/injection.dart' as di;
+import 'package:tv/presentation/bloc/popular_tv/popular_tv_bloc.dart';
+import 'package:tv/presentation/bloc/top_rated_tv/top_rated_tv_bloc.dart';
+import 'package:tv/presentation/bloc/tv_detail/tv_detail_bloc.dart';
+import 'package:tv/presentation/bloc/tv_detail/tv_recommendation/tv_recommendation_bloc.dart';
+import 'package:tv/presentation/bloc/tv_on_air/tv_on_air_bloc.dart';
+import 'package:tv/presentation/bloc/watclist_tv/watchlist_tv_bloc.dart';
 import 'package:tv/presentation/pages/popular_tv_page.dart';
 import 'package:tv/presentation/pages/top_rated_tv_page.dart';
 import 'package:tv/presentation/pages/tv_detail_page.dart';
 import 'package:tv/presentation/pages/tv_on_air_page.dart';
-import 'package:tv/presentation/provider/popular_tv_notifier.dart';
-import 'package:tv/presentation/provider/top_rated_tv_notifier.dart';
-import 'package:tv/presentation/provider/tv_detail_notifier.dart';
-import 'package:tv/presentation/provider/tv_list_notifier.dart';
-import 'package:tv/presentation/provider/tv_on_air_notifier.dart';
-import 'package:tv/presentation/provider/watchlist_tv_notifier.dart';
+
 
 
 
@@ -45,7 +46,14 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiProvider(
       providers: [
-        //movie
+        //home page
+        ChangeNotifierProvider(
+          create: (_) => di.locator<HomeNotifier>(),
+        ),
+
+        /**
+         * Movie Bloc
+         */
         BlocProvider(
           create: (_) => di.locator<NowPlayingMovieBloc>(),
         ),
@@ -75,32 +83,28 @@ class MyApp extends StatelessWidget {
         ),
 
         /**
-         * Tv Show
+         * Tv Show Bloc
          */
-        ChangeNotifierProvider(
-          create: (_) => di.locator<TvListNotifier>(),
+        BlocProvider(
+          create: (_) => di.locator<TvOnAirBloc>(),
         ),
-        ChangeNotifierProvider(
-          create: (_) => di.locator<TvOnAirNotifier>(),
+        BlocProvider(
+          create: (_) => di.locator<TopRatedTvBloc>(),
         ),
-        ChangeNotifierProvider(
-          create: (_) => di.locator<TvDetailNotifier>(),
+        BlocProvider(
+          create: (_) => di.locator<PopularTvBloc>(),
+        ),
+        BlocProvider(
+          create: (_) => di.locator<TvDetailBloc>(),
+        ),
+        BlocProvider(
+          create: (_) => di.locator<TvRecommendationBloc>(),
         ),
         BlocProvider(
           create: (_) => di.locator<SearchTvBloc>(),
         ),
-        ChangeNotifierProvider(
-          create: (_) => di.locator<TopRatedTvNotifier>(),
-        ),
-        ChangeNotifierProvider(
-          create: (_) => di.locator<PopularTvNotifier>(),
-        ),
-        ChangeNotifierProvider(
-          create: (_) => di.locator<WatchlistTvNotifier>(),
-        ),
-        //home page
-        ChangeNotifierProvider(
-          create: (_) => di.locator<HomeNotifier>(),
+        BlocProvider(
+          create: (_) => di.locator<WatchlistTvBloc>(),
         ),
 
       ],
