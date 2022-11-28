@@ -1,5 +1,3 @@
-import 'dart:async';
-
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 
@@ -7,7 +5,6 @@ import '../../../domain/entities/tv.dart';
 import '../../../domain/usecase/get_tv_on_the_air.dart';
 
 part 'tv_on_air_event.dart';
-
 part 'tv_on_air_state.dart';
 
 class TvOnAirBloc extends Bloc<TvOnAirEvent, TvOnAirState> {

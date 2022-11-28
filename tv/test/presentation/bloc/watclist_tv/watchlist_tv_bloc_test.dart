@@ -4,7 +4,6 @@ import 'package:dartz/dartz.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
-import 'package:tv/domain/usecase/get_popular_tv.dart';
 import 'package:tv/domain/usecase/get_watchlist_status_tv.dart';
 import 'package:tv/domain/usecase/get_watchlist_tv.dart';
 import 'package:tv/domain/usecase/remove_watchlist_tv.dart';

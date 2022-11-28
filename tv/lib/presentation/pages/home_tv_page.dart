@@ -1,11 +1,8 @@
-import 'dart:math';
-
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:core/core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:provider/provider.dart';
-import 'package:simple_ripple_animation/simple_ripple_animation.dart';
 import 'package:tv/presentation/bloc/popular_tv/popular_tv_bloc.dart';
 
 import '../../domain/entities/tv.dart';
@@ -153,6 +150,7 @@ class _HomeTvPageState extends State<HomeTvPage> {
 
   Widget _buildCoverTv(Tv tvShow) {
     return GestureDetector(
+      key: Key("tv_cover"),
       onTap: () {
         Navigator.pushNamed(context, TV_DETAIL_ROUTE, arguments: tvShow.id);
       },
@@ -201,6 +199,7 @@ class _HomeTvPageState extends State<HomeTvPage> {
 
   Widget _buildSubHeading({required String title, required Function() onTap}) {
     return Row(
+
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
         Text(
@@ -222,6 +221,7 @@ class _HomeTvPageState extends State<HomeTvPage> {
 
   Widget _buildTvList(List<Tv> tvShow) {
     return Container(
+      key: Key("list_tv"),
       height: 200,
       child: ListView.builder(
         scrollDirection: Axis.horizontal,

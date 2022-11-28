@@ -1,6 +1,7 @@
 
 import 'package:core/core.dart';
 import 'package:dartz/dartz.dart';
+
 import '../entities/tv.dart';
 import '../entities/tv_detail.dart';
 

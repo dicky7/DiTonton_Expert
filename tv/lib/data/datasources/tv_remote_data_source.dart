@@ -1,9 +1,9 @@
 import 'dart:convert';
-import 'package:core/core.dart';
 
-import '../model/tv_detail_model.dart';
+import 'package:core/core.dart';
 import 'package:http/http.dart' as http;
 
+import '../model/tv_detail_model.dart';
 import '../model/tv_model.dart';
 import '../model/tv_response.dart';
 

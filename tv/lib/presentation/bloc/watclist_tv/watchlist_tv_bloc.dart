@@ -1,5 +1,3 @@
-import 'dart:async';
-
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:tv/domain/entities/tv_detail.dart';
@@ -11,7 +9,6 @@ import '../../../domain/usecase/remove_watchlist_tv.dart';
 import '../../../domain/usecase/save_watchlist_tv.dart';
 
 part 'watchlist_tv_event.dart';
-
 part 'watchlist_tv_state.dart';
 
 class WatchlistTvBloc extends Bloc<WatchlistTvEvent, WatchlistTvState> {

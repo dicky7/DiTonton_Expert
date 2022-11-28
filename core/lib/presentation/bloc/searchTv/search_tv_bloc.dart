@@ -1,5 +1,3 @@
-import 'dart:async';
-
 import 'package:bloc/bloc.dart';
 import 'package:core/core.dart';
 import 'package:equatable/equatable.dart';
@@ -8,7 +6,6 @@ import 'package:tv/domain/entities/tv.dart';
 import '../../../domain/usecase/search_tv.dart';
 
 part 'search_tv_event.dart';
-
 part 'search_tv_state.dart';
 
 class SearchTvBloc extends Bloc<SearchTvEvent, SearchTvState> {

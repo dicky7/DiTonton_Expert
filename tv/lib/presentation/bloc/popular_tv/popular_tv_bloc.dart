@@ -1,6 +1,3 @@
-import 'dart:async';
-
-
 import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:tv/domain/usecase/get_popular_tv.dart';

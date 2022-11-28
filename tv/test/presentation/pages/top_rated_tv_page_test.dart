@@ -1,15 +1,13 @@
 
 
-import 'package:core/core.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:mockito/annotations.dart';
-import 'package:tv/domain/entities/tv.dart';
+import 'package:mocktail/mocktail.dart';
 import 'package:tv/presentation/bloc/top_rated_tv/top_rated_tv_bloc.dart';
 import 'package:tv/presentation/pages/top_rated_tv_page.dart';
-import 'package:mocktail/mocktail.dart';
+
 import '../../dummy_data/dummy_objects.dart';
 import '../../dummy_data/pages/page_tv_test_helper.dart';
 

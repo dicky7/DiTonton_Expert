@@ -3,7 +3,6 @@ import 'dart:io';
 import 'package:core/core.dart';
 import 'package:core/data/models/genre_model.dart';
 import 'package:dartz/dartz.dart';
-
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/mockito.dart';
 import 'package:tv/data/model/tv_detail_model.dart';
@@ -11,7 +10,6 @@ import 'package:tv/data/model/tv_model.dart';
 import 'package:tv/data/model/tv_season_model.dart';
 import 'package:tv/data/repositories/tv_repository_impl.dart';
 import 'package:tv/domain/entities/tv.dart';
-
 
 import '../../dummy_data/dummy_objects.dart';
 import '../../helpers/test_helper.mocks.dart';

@@ -3,12 +3,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
-
-import 'package:movie/presentation/pages/home_movie_page.dart';
 import 'package:tv/presentation/bloc/popular_tv/popular_tv_bloc.dart';
 import 'package:tv/presentation/bloc/top_rated_tv/top_rated_tv_bloc.dart';
 import 'package:tv/presentation/bloc/tv_on_air/tv_on_air_bloc.dart';
 import 'package:tv/presentation/pages/home_tv_page.dart';
+
 import '../../dummy_data/dummy_objects.dart';
 import '../../dummy_data/pages/page_tv_test_helper.dart';
 
@@ -82,10 +81,14 @@ void main() {
 
 
     final listViewFinder = find.byType(ListView);
+    final coverKeyFinder = find.byKey(Key("tv_cover"));
+    final listKeyFinder = find.byKey(Key("list_tv"));
 
     await widgetTester.pumpWidget(_makeTestableWidget(HomeTvPage()));
 
     expect(listViewFinder, findsNWidgets(3));
+    expect(coverKeyFinder, findsOneWidget);
+    expect(listKeyFinder, findsNWidgets(3));
   });
 
   testWidgets('page should display error with text when state is Error',
@@ -111,4 +114,6 @@ void main() {
     await tester.pumpWidget(_makeTestableWidget(HomeTvPage()));
     expect(errorKeyFinder, findsNWidgets(3));
   });
+
+
 }
