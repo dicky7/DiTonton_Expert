@@ -47,8 +47,7 @@ import 'package:tv/presentation/bloc/tv_detail/tv_detail_bloc.dart';
 import 'package:tv/presentation/bloc/tv_detail/tv_recommendation/tv_recommendation_bloc.dart';
 import 'package:tv/presentation/bloc/tv_on_air/tv_on_air_bloc.dart';
 import 'package:tv/presentation/bloc/watclist_tv/watchlist_tv_bloc.dart';
-
-
+import 'package:core/utils/ssl_pinning/http_ssl_pinning.dart';
 
 final locator = GetIt.instance;
 
@@ -197,5 +196,5 @@ void init() {
 
 
   // external
-  locator.registerLazySingleton(() => http.Client());
+  locator.registerLazySingleton(() => HttpSSLPinning.client);
 }

@@ -21,6 +21,7 @@ dependencies:
   path_provider: ^2.0.11
   simple_ripple_animation: ^0.0.3
   flutter_bloc: ^8.0.1
+  firebase_crashlytics: ^3.0.6
 
   core:
     path: ../core
@@ -40,9 +41,8 @@ dev_dependencies:
 flutter:
 
   # To add assets to your package, add an assets section, like this:
-  # assets:
-  #   - images/a_dot_burr.jpeg
-  #   - images/a_dot_ham.jpeg
+   assets:
+     - ../certificates/
   #
   # For details regarding assets in packages, see
   # https://flutter.dev/assets-and-images/#from-packages
