@@ -1,7 +1,6 @@
 import 'package:core/core.dart';
 import 'package:dartz/dartz.dart';
 
-
 import '../entities/movie_detail.dart';
 import '../repositories/movie_repository.dart';
 

@@ -1,7 +1,4 @@
-import 'dart:async';
-
 import 'package:bloc/bloc.dart';
-import 'package:equatable/equatable.dart';
 import 'package:movie/presentation/bloc/popular_movie/popular_movie_event.dart';
 import 'package:movie/presentation/bloc/popular_movie/popular_movie_state.dart';
 

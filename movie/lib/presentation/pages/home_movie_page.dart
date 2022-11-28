@@ -6,7 +6,6 @@ import 'package:movie/presentation/bloc/popular_movie/popular_movie_event.dart';
 import 'package:movie/presentation/bloc/popular_movie/popular_movie_state.dart';
 import 'package:movie/presentation/bloc/top_rated_movie/top_rated_movie_bloc.dart';
 import 'package:provider/provider.dart';
-import 'package:simple_ripple_animation/simple_ripple_animation.dart';
 
 import '../../domain/entities/movie.dart';
 import '../bloc/now_playing_movie/now_playing_movie_bloc.dart';

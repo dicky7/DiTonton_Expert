@@ -5,15 +5,11 @@ import 'package:core/presentation/bloc/searchMovie/search_state_movie.dart';
 import 'package:core/presentation/bloc/searchTv/search_tv_bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:movie/domain/entities/movie.dart';
 import 'package:provider/provider.dart';
-import 'package:tv/domain/entities/tv.dart';
 
 import '../../styles/text_styles.dart';
 import '../../utils/drawer_item_enum.dart';
 import '../../utils/routes.dart';
-import '../../utils/state_enum.dart';
-import '../provider/search_notifier.dart';
 import '../widgets/item_card_list.dart';
 
 

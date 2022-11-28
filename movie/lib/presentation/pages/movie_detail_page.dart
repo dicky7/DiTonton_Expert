@@ -6,8 +6,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:provider/provider.dart';
 
-
-import '../../domain/entities/movie.dart';
 import '../../domain/entities/movie_detail.dart';
 import '../bloc/movie_detail/movie_detail_bloc.dart';
 import '../bloc/movie_detail/recommendation/movie_recommendation_bloc.dart';

@@ -1,5 +1,3 @@
-import 'dart:async';
-
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:movie/domain/entities/movie_detail.dart';
@@ -11,7 +9,6 @@ import '../../../domain/usecases/remove_watchlist.dart';
 import '../../../domain/usecases/save_watchlist.dart';
 
 part 'watchlist_movie_event.dart';
-
 part 'watchlist_movie_state.dart';
 
 class WatchlistMovieBloc

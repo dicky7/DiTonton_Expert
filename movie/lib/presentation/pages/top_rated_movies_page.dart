@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:movie/presentation/bloc/top_rated_movie/top_rated_movie_bloc.dart';
 import 'package:provider/provider.dart';
-import 'movie_detail_page.dart';
 
 class TopRatedMoviesPage extends StatefulWidget {
   @override

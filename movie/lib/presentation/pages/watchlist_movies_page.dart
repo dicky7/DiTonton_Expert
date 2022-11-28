@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:movie/presentation/bloc/watchlist_movie/watchlist_movie_bloc.dart';
 import 'package:provider/provider.dart';
-import 'movie_detail_page.dart';
 
 class WatchlistMoviesPage extends StatefulWidget {
   @override

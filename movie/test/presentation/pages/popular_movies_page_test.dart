@@ -7,6 +7,7 @@ import 'package:mocktail/mocktail.dart';
 import 'package:movie/presentation/bloc/popular_movie/popular_movie_bloc.dart';
 import 'package:movie/presentation/bloc/popular_movie/popular_movie_state.dart';
 import 'package:movie/presentation/pages/popular_movies_page.dart';
+
 import '../../dummy_data/dummy_objects.dart';
 import '../../helpers/pages/page_test_helper.dart';
 

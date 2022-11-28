@@ -6,6 +6,7 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
 import 'package:movie/presentation/bloc/watchlist_movie/watchlist_movie_bloc.dart';
 import 'package:movie/presentation/pages/watchlist_movies_page.dart';
+
 import '../../dummy_data/dummy_objects.dart';
 import '../../helpers/pages/page_test_helper.dart';
 

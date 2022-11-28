@@ -9,6 +9,7 @@ import 'package:movie/presentation/bloc/popular_movie/popular_movie_bloc.dart';
 import 'package:movie/presentation/bloc/popular_movie/popular_movie_state.dart';
 import 'package:movie/presentation/bloc/top_rated_movie/top_rated_movie_bloc.dart';
 import 'package:movie/presentation/pages/home_movie_page.dart';
+
 import '../../dummy_data/dummy_objects.dart';
 import '../../helpers/pages/page_test_helper.dart';
 

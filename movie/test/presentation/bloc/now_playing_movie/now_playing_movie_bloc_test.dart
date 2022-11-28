@@ -1,3 +1,4 @@
+import 'package:bloc_test/bloc_test.dart';
 import 'package:core/utils/failure.dart';
 import 'package:dartz/dartz.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -6,7 +7,6 @@ import 'package:mockito/mockito.dart';
 import 'package:movie/domain/usecases/get_now_playing_movies.dart';
 import 'package:movie/presentation/bloc/now_playing_movie/now_playing_movie_bloc.dart';
 import 'package:movie/presentation/bloc/now_playing_movie/now_playing_movie_state.dart';
-import 'package:bloc_test/bloc_test.dart';
 
 import '../../../dummy_data/dummy_objects.dart';
 import 'now_playing_movie_bloc_test.mocks.dart';

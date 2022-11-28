@@ -1,4 +1,5 @@
 import 'package:core/utils/exception.dart';
+
 import '../models/movie_table.dart';
 import 'db/database_helper.dart';
 
