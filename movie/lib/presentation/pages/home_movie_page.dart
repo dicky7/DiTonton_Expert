@@ -65,12 +65,12 @@ class _HomeMoviePageState extends State<HomeMoviePage> with TickerProviderStateM
             children: [
               _buildNowPlaying(),
               _buildSubHeading(
-                  title: 'Popular',
-                  onTap: () => Navigator.pushNamed(context, POPULAR_MOVIES_ROUTE)),
-              _buildTopRated(),
-              _buildSubHeading(
                   title: 'Top Rated',
                   onTap: () => Navigator.pushNamed(context, TOP_RATED_MOVIE_ROUTE)),
+              _buildTopRated(),
+              _buildSubHeading(
+                  title: 'Popular',
+                  onTap: () => Navigator.pushNamed(context, POPULAR_MOVIES_ROUTE)),
               _buildPopular()
             ],
           ),

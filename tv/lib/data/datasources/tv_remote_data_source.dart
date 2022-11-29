@@ -6,6 +6,7 @@ import 'package:http/http.dart' as http;
 import '../model/tv_detail_model.dart';
 import '../model/tv_model.dart';
 import '../model/tv_response.dart';
+import 'package:http/io_client.dart';
 
 abstract class TvRemoteDataSource{
   Future<List<TvModel>> getTvOnTheAir();
@@ -17,7 +18,7 @@ abstract class TvRemoteDataSource{
 }
 
 class TvRemoteDataSourceImpl implements TvRemoteDataSource{
-  final http.Client client;
+  final IOClient  client;
   TvRemoteDataSourceImpl({required this.client});
 
   @override

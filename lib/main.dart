@@ -7,6 +7,7 @@ import 'package:core/presentation/pages/search_page.dart';
 import 'package:core/presentation/provider/home_notifier.dart';
 import 'package:core/presentation/provider/search_notifier.dart';
 import 'package:core/styles/colors.dart';
+import 'package:core/utils/ssl_pinning/http_ssl_pinning.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -38,6 +39,7 @@ import 'firebase_options.dart';
 
 void main() async{
   WidgetsFlutterBinding.ensureInitialized();
+  await HttpSSLPinning.init();
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
