@@ -50,8 +50,7 @@ class _HomeMoviePageState extends State<HomeMoviePage> with TickerProviderStateM
         actions: [
           IconButton(
             onPressed: () {
-              Navigator.pushNamed(context, SEARCH_ROUTE,
-                  arguments: DrawerItem.Movie);
+              Navigator.pushNamed(context, SEARCH_ROUTE);
             },
             icon: const Icon(Icons.search),
           )

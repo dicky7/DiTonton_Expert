@@ -14,58 +14,84 @@ import '../widgets/item_card_list.dart';
 
 
 class SearchPage extends StatelessWidget {
-
-  final DrawerItem activeDrawerItem;
-
-  SearchPage({required this.activeDrawerItem});
+  final List<String> _myTabs = ["Movie", "Tv Show"];
 
   @override
   Widget build(BuildContext context) {
-    var _title = activeDrawerItem == DrawerItem.Movie ? "Movie" : "TV Show";
-
-    return Scaffold(
-      appBar: AppBar(
-        title: Text('Search $_title\s'),
-      ),
-      body: Padding(
-        padding: const EdgeInsets.all(16.0),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            TextField(
-              onChanged: (query) {
-                if (activeDrawerItem == DrawerItem.Movie) {
-                  context.read<SearchBlocMovie>().add(OnQueryChanged(query));
-                } else {
-                  context.read<SearchTvBloc>().add(OnQueryTvChanged(query));
-                }
-              },
-              decoration: const InputDecoration(
-                hintText: 'Search title',
-                prefixIcon: Icon(Icons.search),
-                border: OutlineInputBorder(),
+    return DefaultTabController(
+      length: 2,
+      child: Scaffold(
+        appBar: AppBar(
+          title: Text('Search'),
+        ),
+        body: Padding(
+          padding: const EdgeInsets.all(16.0),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              TextField(
+                onChanged: (query) {
+                    context.read<SearchBlocMovie>().add(OnQueryChanged(query));
+                    context.read<SearchTvBloc>().add(OnQueryTvChanged(query));
+                },
+                decoration: const InputDecoration(
+                  hintText: 'Search title',
+                  prefixIcon: Icon(Icons.search),
+                  border: OutlineInputBorder(),
+                ),
+                textInputAction: TextInputAction.search,
               ),
-              textInputAction: TextInputAction.search,
-            ),
-            const SizedBox(height: 16),
-            Text(
-              'Search Result',
-              style: kHeading6,
-            ),
-            _buildSearchResult()
-          ],
+              const SizedBox(height: 16),
+              Text(
+                'Search Result',
+                style: kHeading5,
+              ),
+              const SizedBox(height: 10),
+              TabBar(
+                indicator: BoxDecoration(
+                  borderRadius: BorderRadius.circular(20),
+                  color: Colors.blue.shade900
+                ),
+                tabs: [
+                  Tab(
+                    child: Row(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        Text(_myTabs[0], style:kSubtitle,),
+                        SizedBox(width: 10),
+                        Icon(Icons.movie),
+                      ],
+                    ),
+                  ),
+                  Tab(
+                    child: Row(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        Text(_myTabs[1], style:kSubtitle,),
+                        SizedBox(width: 10),
+                        Icon(Icons.tv),
+                      ],
+                    ),
+                  )
+                ],
+              ),
+              const SizedBox(height: 10),
+              Flexible(
+                flex: 1,
+                child: TabBarView(
+                  children: [
+                    _buildListMovie(),
+                    _buildListTv()
+                  ],
+                ),
+              )
+            ],
+          ),
         ),
       ),
     );
   }
 
-  Widget _buildSearchResult(){
-    if(activeDrawerItem == DrawerItem.Movie){
-      return _buildListMovie();
-    }else{
-      return _buildListTv();
-    }
-  }
 
   Widget _buildListMovie() {
     return BlocBuilder<SearchBlocMovie, SearchStateMovie>(
@@ -75,39 +101,31 @@ class SearchPage extends StatelessWidget {
         }
         else if (state is SearchMovieHasData) {
           final result = state.resultMovie;
-          return Expanded(
-            child: ListView.builder(
-              padding: const EdgeInsets.all(8),
-              itemBuilder: (context, index) {
-                final movie = result[index];
-                return ItemCard(
-                  activeDrawerItem: DrawerItem.Movie,
-                  routeName: MOVIE_DETAIL_ROUTE,
-                  movie: movie,
-                );
-              },
-              itemCount: result.length,
-            ),
+          return ListView.builder(
+            padding: const EdgeInsets.all(8),
+            itemBuilder: (context, index) {
+              final movie = result[index];
+              return ItemCard(
+                activeDrawerItem: DrawerItem.Movie,
+                routeName: MOVIE_DETAIL_ROUTE,
+                movie: movie,
+              );
+            },
+            itemCount: result.length,
           );
         }
         else if(state is SearchMovieEmpty){
-          return Expanded(
-            child: Center(
-              child: Text("Movie Not Found"),
-            ),
+          return Center(
+            child: Text("Movie Not Found"),
           );
         }
         else if(state is SearchMovieError){
-          return Expanded(
-            child: Center(
-              child: Text(state.message),
-            ),
+          return Center(
+            child: Text(state.message),
           );
         }
         else {
-          return Expanded(
-            child: Container(),
-          );
+          return Container();
         }
       },
     );
@@ -123,42 +141,36 @@ class SearchPage extends StatelessWidget {
         }
         else if (state is SearchTvHasData) {
           final result = state.result;
-          return Expanded(
-            child: ListView.builder(
-              padding: const EdgeInsets.all(8),
-              itemBuilder: (context, index) {
-                final tvShow = result[index];
-                return ItemCard(
-                  activeDrawerItem: DrawerItem.TvShow,
-                  routeName: TV_DETAIL_ROUTE,
-                  tv: tvShow,
-                );
-              },
-              itemCount: result.length,
-            ),
+          return ListView.builder(
+            padding: const EdgeInsets.all(8),
+            itemBuilder: (context, index) {
+              final tvShow = result[index];
+              return ItemCard(
+                activeDrawerItem: DrawerItem.TvShow,
+                routeName: TV_DETAIL_ROUTE,
+                tv: tvShow,
+              );
+            },
+            itemCount: result.length,
           );
         }
         else if(state is SearchTvEmpty){
-          return Expanded(
-            child: Center(
-              child: Text("Tv Not Found"),
-            ),
+          return Center(
+            child: Text("Tv Not Found"),
           );
         }
         else if(state is SearchTvError){
-          return Expanded(
-            child: Center(
-              child: Text(state.message),
-            ),
+          return Center(
+            child: Text(state.message),
           );
         }
         else {
-          return Expanded(
-            child: Container(),
-          );
+          return Container();
         }
       },
     );
   }
 }
+
+
 

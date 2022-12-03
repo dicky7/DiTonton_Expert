@@ -141,10 +141,7 @@ class MyApp extends StatelessWidget {
                 settings: settings,
               );
             case SEARCH_ROUTE:
-              final activeDrawerItem = settings.arguments as DrawerItem;
-              return CupertinoPageRoute(builder: (_) => SearchPage(
-                activeDrawerItem: activeDrawerItem,
-              ));
+              return CupertinoPageRoute(builder: (_) => SearchPage());
             case ABOUT_ROUTE:
               return MaterialPageRoute(builder: (_) => AboutPage());
 
