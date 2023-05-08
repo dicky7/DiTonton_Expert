@@ -4,6 +4,7 @@ import 'package:core/core.dart';
 import 'package:core/presentation/bloc/searchMovie/search_bloc_movie.dart';
 import 'package:core/presentation/bloc/searchTv/search_tv_bloc.dart';
 import 'package:core/presentation/pages/search_page.dart';
+import 'package:core/presentation/pages/splash_page.dart';
 import 'package:core/presentation/provider/home_notifier.dart';
 import 'package:core/presentation/provider/search_notifier.dart';
 import 'package:core/styles/colors.dart';
@@ -123,12 +124,14 @@ class MyApp extends StatelessWidget {
           textTheme: kTextTheme,
         ),
         home: Material(
-          child: HomePage(),
+          child: SplashPage(),
         ),
         navigatorObservers: [routeObserver],
         onGenerateRoute: (RouteSettings settings) {
           switch (settings.name) {
-            case '/home':
+            case'/splash':
+              return MaterialPageRoute(builder: (context) => SplashPage());
+            case HOME_MOVIE_ROUTE:
               return MaterialPageRoute(builder: (_) => HomeMoviePage());
             case POPULAR_MOVIES_ROUTE:
               return CupertinoPageRoute(builder: (_) => PopularMoviesPage());

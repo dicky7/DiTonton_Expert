@@ -43,10 +43,10 @@ class _HomePageState extends State<HomePage> with SingleTickerProviderStateMixin
     return Container(
       child: Column(
         children: [
-          const UserAccountsDrawerHeader(
+          UserAccountsDrawerHeader(
             currentAccountPicture: CircleAvatar(
-              backgroundImage: NetworkImage(
-                  "https://ik.imagekit.io/lkvkafaowca/netflix-logo-png-2616_FC6yOaZwX.png?ik-sdk-version=javascript-1.4.3&updatedAt=1668394551577"
+              child: Image.asset(
+                  "assets/logo.png"
               ),
             ),
             accountName: Text("NFlix"),

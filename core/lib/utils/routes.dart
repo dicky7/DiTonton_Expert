@@ -1,4 +1,8 @@
+//splash
+const SPLASH_ROUTE = '/splash';
+
 //movie routes
+const HOME_MOVIE_ROUTE = '/home-movie';
 const POPULAR_MOVIES_ROUTE = '/popular-movie';
 const TOP_RATED_MOVIE_ROUTE = '/top-rated-movie';
 const MOVIE_DETAIL_ROUTE = '/movie_detail';
