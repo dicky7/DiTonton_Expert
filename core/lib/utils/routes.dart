@@ -1,5 +1,6 @@
 //splash
 const SPLASH_ROUTE = '/splash';
+const HOME_ROUTE = '/home';
 
 //movie routes
 const HOME_MOVIE_ROUTE = '/home-movie';

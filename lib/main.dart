@@ -123,14 +123,14 @@ class MyApp extends StatelessWidget {
           scaffoldBackgroundColor: kRichBlack,
           textTheme: kTextTheme,
         ),
-        home: Material(
-          child: SplashPage(),
-        ),
         navigatorObservers: [routeObserver],
+        initialRoute: SPLASH_ROUTE,
         onGenerateRoute: (RouteSettings settings) {
           switch (settings.name) {
-            case'/splash':
+            case SPLASH_ROUTE:
               return MaterialPageRoute(builder: (context) => SplashPage());
+            case HOME_ROUTE:
+              return MaterialPageRoute(builder: (context) => HomePage());
             case HOME_MOVIE_ROUTE:
               return MaterialPageRoute(builder: (_) => HomeMoviePage());
             case POPULAR_MOVIES_ROUTE:

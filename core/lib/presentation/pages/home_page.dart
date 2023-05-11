@@ -11,6 +11,7 @@ import '../provider/home_notifier.dart';
 
 class HomePage extends StatefulWidget {
 
+
   @override
   State<HomePage> createState() => _HomePageState();
 }
@@ -40,51 +41,53 @@ class _HomePageState extends State<HomePage> with SingleTickerProviderStateMixin
   }
 
   Widget _buildDrawer(Function(DrawerItem) itemCallback, DrawerItem activeDrawerItem,) {
-    return Container(
-      child: Column(
-        children: [
-          UserAccountsDrawerHeader(
-            currentAccountPicture: CircleAvatar(
-              child: Image.asset(
-                  "assets/logo.png"
+    return Material(
+      child: Container(
+        child: Column(
+          children: [
+            UserAccountsDrawerHeader(
+              currentAccountPicture: CircleAvatar(
+                child: Image.asset(
+                    "assets/logo.png"
+                ),
               ),
+              accountName: Text("NFlix"),
+              accountEmail: Text("Nflix@gmail.com"),
             ),
-            accountName: Text("NFlix"),
-            accountEmail: Text("Nflix@gmail.com"),
-          ),
-          ListTile(
-            leading: const Icon(Icons.movie),
-            title: const Text("Movies"),
-            onTap: () {
-              itemCallback(DrawerItem.Movie);
-              _animationController.reverse();
-            },
-          ),
-          ListTile(
-            leading: const Icon(Icons.tv),
-            title: const Text("Tv Show"),
-            onTap: () {
-              itemCallback(DrawerItem.TvShow);
-              _animationController.reverse();
-            },
-          ),
-          ListTile(
-            leading: const Icon(Icons.save_alt),
-            title: const Text("Watchlist"),
-            onTap: () {
-              itemCallback(DrawerItem.Watchlist);
-              _animationController.reverse();
-            },
-          ),
-          ListTile(
-            leading: const Icon(Icons.info_outline),
-            title: const Text('About'),
-            onTap: () {
-              Navigator.pushNamed(context, ABOUT_ROUTE);
-              _animationController.reverse();
-            },
-          ),
-        ],
+            ListTile(
+              leading: const Icon(Icons.movie),
+              title: const Text("Movies"),
+              onTap: () {
+                itemCallback(DrawerItem.Movie);
+                _animationController.reverse();
+              },
+            ),
+            ListTile(
+              leading: const Icon(Icons.tv),
+              title: const Text("Tv Show"),
+              onTap: () {
+                itemCallback(DrawerItem.TvShow);
+                _animationController.reverse();
+              },
+            ),
+            ListTile(
+              leading: const Icon(Icons.save_alt),
+              title: const Text("Watchlist"),
+              onTap: () {
+                itemCallback(DrawerItem.Watchlist);
+                _animationController.reverse();
+              },
+            ),
+            ListTile(
+              leading: const Icon(Icons.info_outline),
+              title: const Text('About'),
+              onTap: () {
+                Navigator.pushNamed(context, ABOUT_ROUTE);
+                _animationController.reverse();
+              },
+            ),
+          ],
+        ),
       ),
     );
   }
