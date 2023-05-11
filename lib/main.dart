@@ -1,14 +1,15 @@
-
 import 'package:about/about_page.dart';
+import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:core/core.dart';
+import 'package:core/presentation/bloc/internet/internet_cubit.dart';
+import 'package:core/presentation/bloc/internet/internet_state.dart';
 import 'package:core/presentation/bloc/searchMovie/search_bloc_movie.dart';
 import 'package:core/presentation/bloc/searchTv/search_tv_bloc.dart';
 import 'package:core/presentation/pages/search_page.dart';
 import 'package:core/presentation/pages/splash_page.dart';
 import 'package:core/presentation/provider/home_notifier.dart';
-import 'package:core/presentation/provider/search_notifier.dart';
-import 'package:core/styles/colors.dart';
 import 'package:core/utils/ssl_pinning/http_ssl_pinning.dart';
+import 'package:ditonton/injection.dart' as di;
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -24,7 +25,6 @@ import 'package:movie/presentation/pages/movie_detail_page.dart';
 import 'package:movie/presentation/pages/popular_movies_page.dart';
 import 'package:movie/presentation/pages/top_rated_movies_page.dart';
 import 'package:provider/provider.dart';
-import 'package:ditonton/injection.dart' as di;
 import 'package:tv/presentation/bloc/popular_tv/popular_tv_bloc.dart';
 import 'package:tv/presentation/bloc/top_rated_tv/top_rated_tv_bloc.dart';
 import 'package:tv/presentation/bloc/tv_detail/tv_detail_bloc.dart';
@@ -38,7 +38,7 @@ import 'package:tv/presentation/pages/tv_on_air_page.dart';
 
 import 'firebase_options.dart';
 
-void main() async{
+void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await HttpSSLPinning.init();
   await Firebase.initializeApp(
@@ -113,7 +113,7 @@ class MyApp extends StatelessWidget {
         BlocProvider(
           create: (_) => di.locator<WatchlistTvBloc>(),
         ),
-
+        BlocProvider(create: (_) => InternetCubit(connectivity: Connectivity()))
       ],
       child: MaterialApp(
         title: 'Flutter Demo',
@@ -123,8 +123,8 @@ class MyApp extends StatelessWidget {
           scaffoldBackgroundColor: kRichBlack,
           textTheme: kTextTheme,
         ),
-        navigatorObservers: [routeObserver],
         initialRoute: SPLASH_ROUTE,
+        navigatorObservers: [routeObserver],
         onGenerateRoute: (RouteSettings settings) {
           switch (settings.name) {
             case SPLASH_ROUTE:
@@ -152,9 +152,7 @@ class MyApp extends StatelessWidget {
             case TV_DETAIL_ROUTE:
               final id = settings.arguments as int;
               return MaterialPageRoute(
-                builder: (_) => TvDetailPage(id: id),
-                settings: settings
-              );
+                  builder: (_) => TvDetailPage(id: id), settings: settings);
             case TV_ON_AIR_ROUTE:
               return MaterialPageRoute(builder: (_) => TvOnTheAirPage());
             case POPULAR_TV_ROUTE:
@@ -170,6 +168,23 @@ class MyApp extends StatelessWidget {
                 );
               });
           }
+        },
+        builder: (context, child) {
+          return BlocListener<InternetCubit, InternetState>(
+              listener: (context, state) {
+                if (state is InternetDisconnected) {
+                  ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                    backgroundColor: Colors.red,
+                    duration: const Duration(seconds: 2),
+                    content: Text(
+                      'No Internet Connection',
+                      textAlign: TextAlign.center,
+                    ),
+                  ));
+              }
+            },
+            child: child,
+          );
         },
       ),
     );

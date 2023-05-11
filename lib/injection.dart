@@ -1,6 +1,8 @@
 
+import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:core/domain/usecase/search_movies.dart';
 import 'package:core/domain/usecase/search_tv.dart';
+import 'package:core/presentation/bloc/internet/internet_cubit.dart';
 import 'package:core/presentation/bloc/searchMovie/search_bloc_movie.dart';
 import 'package:core/presentation/bloc/searchTv/search_tv_bloc.dart';
 import 'package:core/presentation/provider/home_notifier.dart';
@@ -137,6 +139,9 @@ void init() {
   locator.registerFactory(
         () => HomeNotifier(),
   );
+  locator.registerFactory(
+    () => InternetCubit(connectivity: locator()),
+  );
 
 
   // use case movie
@@ -196,5 +201,6 @@ void init() {
 
 
   // external
+  locator.registerLazySingleton(() => Connectivity());
   locator.registerLazySingleton(() => HttpSSLPinning.client);
 }
